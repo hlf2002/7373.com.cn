@@ -395,7 +395,14 @@
     footer {
       padding: 40px 0;
       border-top: 1px solid var(--border);
-      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     footer p {
@@ -406,6 +413,13 @@
     footer a {
       color: var(--accent);
       text-decoration: none;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
     @media (max-width: 768px) {
@@ -487,7 +501,13 @@
 
   <footer>
     <div class="container">
-      <p>© 2024 珠海换呗科技有限公司 · <a href="https://github.com/hlf2002" target="_blank">GitHub</a></p>
+      <div class="footer-inner">
+        <p>© 2024 珠海换呗科技有限公司 · <a href="https://github.com/hlf2002" target="_blank">GitHub</a></p>
+        <div class="footer-right">
+          <span>ICP 备案号：粤ICP备XXXXXXXX号</span>
+          <span>公安备案：XXXXXXXXXX</span>
+        </div>
+      </div>
     </div>
   </footer>
 
