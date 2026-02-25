@@ -6,18 +6,22 @@
   <title>珠海换呗科技有限公司</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-bg: #f8fafc;
-      --color-surface: #ffffff;
-      --color-surface-elevated: #ffffff;
-      --color-border: #e2e8f0;
-      --color-text: #1e293b;
-      --color-text-muted: #64748b;
-      --color-accent: #3b82f6;
-      --color-accent-glow: rgba(59, 130, 246, 0.15);
-      --color-success: #2dd4bf;
+      --bg-primary: #08080a;
+      --bg-secondary: #0f0f12;
+      --bg-card: #151519;
+      --bg-card-hover: #1a1a1f;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(255,255,255,0.12);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255,255,255,0.5);
+      --text-muted: rgba(255,255,255,0.35);
+      --accent: #3b82f6;
+      --accent-glow: rgba(59,130,246,0.4);
+      --accent-secondary: #06b6d4;
+      --accent-tertiary: #8b5cf6;
     }
 
     * {
@@ -31,32 +35,81 @@
     }
 
     body {
-      font-family: 'Noto Sans SC', -apple-system, sans-serif;
-      background-color: var(--color-bg);
-      color: var(--color-text);
+      font-family: 'Outfit', 'Noto Sans SC', -apple-system, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       line-height: 1.6;
       overflow-x: hidden;
     }
 
-    body::before {
-      content: '';
+    /* Animated Background */
+    .bg-effects {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-image:
-        radial-gradient(circle at 20% 50%, var(--color-accent-glow) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L30 60M0 30L60 30' stroke='%23e5e7eb' stroke-width='0.5' fill='none'/%3E%3C/svg%3E");
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .bg-gradient-1 {
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%);
+      top: -450px;
+      left: -200px;
+      opacity: 0.6;
+      animation: float 25s ease-in-out infinite;
+    }
+
+    .bg-gradient-2 {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
+      bottom: -300px;
+      right: -150px;
+      opacity: 0.5;
+      animation: float 18s ease-in-out infinite reverse;
+    }
+
+    .bg-gradient-3 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%);
+      top: 40%;
+      left: 60%;
+      opacity: 0.4;
+      animation: float 22s ease-in-out infinite;
+    }
+
+    .bg-grid {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 50px 50px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(40px, -40px) scale(1.05); }
+      66% { transform: translate(-30px, 30px) scale(0.95); }
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 24px;
+      position: relative;
+      z-index: 1;
     }
 
     /* Header */
@@ -66,10 +119,10 @@
       top: 0;
       left: 0;
       right: 0;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(20px);
       z-index: 100;
-      border-bottom: 1px solid var(--color-border);
+      background: rgba(8,8,10,0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
     }
 
     .header-inner {
@@ -81,142 +134,278 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       text-decoration: none;
     }
 
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-tertiary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
     .logo-text {
-      font-family: 'Noto Serif SC', serif;
       font-size: 20px;
       font-weight: 700;
-      color: var(--color-text);
+      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     nav {
       display: flex;
-      gap: 32px;
+      gap: 36px;
     }
 
     nav a {
-      color: var(--color-text-muted);
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-tertiary));
+      transition: width 0.3s;
     }
 
     nav a:hover {
-      color: var(--color-accent);
+      color: var(--text-primary);
     }
 
-    /* Hero - Products Carousel */
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero */
     .hero {
       min-height: 100vh;
-      padding-top: 120px;
+      display: flex;
+      align-items: center;
+      padding-top: 140px;
       padding-bottom: 80px;
     }
 
-    .hero-header {
+    .hero-content {
       text-align: center;
-      margin-bottom: 48px;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .hero-header h1 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 16px;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(139,92,246,0.1);
+      border: 1px solid rgba(139,92,246,0.2);
+      border-radius: 50px;
+      font-size: 13px;
+      color: var(--accent-tertiary);
+      margin-bottom: 28px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-tertiary);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.2); }
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent-tertiary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-subtitle {
-      font-size: 18px;
-      color: var(--color-text-muted);
+      font-size: 20px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 52px;
+      line-height: 1.7;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Products Scroll */
+    .products-section {
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 24px;
     }
 
     .products-scroll {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       overflow-x: auto;
-      padding: 20px 0 40px;
+      padding: 10px 0 30px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
     }
 
     .products-scroll::-webkit-scrollbar {
-      height: 8px;
+      height: 6px;
     }
 
     .products-scroll::-webkit-scrollbar-track {
-      background: var(--color-border);
-      border-radius: 4px;
+      background: var(--bg-card);
+      border-radius: 3px;
     }
 
     .products-scroll::-webkit-scrollbar-thumb {
-      background: var(--color-accent);
-      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-tertiary));
+      border-radius: 3px;
     }
 
     .product-card {
-      flex: 0 0 360px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 20px;
-      padding: 32px;
+      flex: 0 0 380px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
       scroll-snap-align: start;
-      transition: all 0.3s;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-tertiary), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .product-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-8px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
     }
 
     .product-icon {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    .product-card.password .product-icon {
-      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      font-size: 28px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.1));
     }
 
     .product-card.jobs .product-icon {
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,182,212,0.1));
     }
 
-    .product-card h3 {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 8px;
+    .product-card.coming .product-icon {
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
     }
 
-    .product-card .tag {
-      display: inline-block;
-      padding: 4px 12px;
-      background: var(--color-accent-glow);
-      color: var(--color-accent);
-      font-size: 12px;
-      font-weight: 500;
+    .product-tag {
+      padding: 6px 14px;
+      background: rgba(59,130,246,0.1);
+      border: 1px solid rgba(59,130,246,0.2);
       border-radius: 20px;
-      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .product-card.jobs .tag {
-      background: rgba(16, 185, 129, 0.15);
+    .product-card.jobs .product-tag {
+      background: rgba(16,185,129,0.1);
+      border-color: rgba(16,185,129,0.2);
       color: #10b981;
     }
 
-    .product-card p {
-      color: var(--color-text-muted);
+    .product-card.coming .product-tag {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-muted);
+    }
+
+    .product-card h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .product-card > p {
+      color: var(--text-muted);
       font-size: 14px;
       line-height: 1.7;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .product-links {
@@ -229,47 +418,57 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 10px 16px;
-      background: var(--color-accent);
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--accent), #2563eb);
       color: #fff;
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
-      border-radius: 8px;
+      font-weight: 600;
+      border-radius: 10px;
       transition: all 0.3s;
     }
 
     .product-btn:hover {
-      background: #2563eb;
-      transform: scale(1.02);
+      background: linear-gradient(135deg, #2563eb, var(--accent));
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59,130,246,0.3);
     }
 
     .product-btn.secondary {
-      background: var(--color-surface);
-      color: var(--color-text);
-      border: 1px solid var(--color-border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
     }
 
     .product-btn.secondary:hover {
-      background: var(--color-border);
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
     }
 
-    /* Jobs Section */
+    /* Jobs */
     .job-list {
-      margin-top: 16px;
+      margin-top: 8px;
     }
 
     .job-item {
       padding: 16px;
-      background: var(--color-bg);
+      background: var(--bg-secondary);
       border-radius: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .job-item:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.02);
     }
 
     .job-item h4 {
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 4px;
+      color: var(--text-primary);
     }
 
     .job-item .salary {
@@ -281,113 +480,151 @@
     .job-item .tags {
       display: flex;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
 
     .job-item .tags span {
       font-size: 11px;
-      color: var(--color-text-muted);
-      background: var(--color-surface);
-      padding: 4px 8px;
-      border-radius: 4px;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      padding: 4px 10px;
+      border-radius: 6px;
     }
 
-    /* Features */
+    /* Features Section */
     .features {
-      padding: 80px 0;
+      padding: 100px 0;
+      position: relative;
     }
 
-    .section-title {
+    .features::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--border), transparent);
+    }
+
+    .section-header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
     }
 
-    .section-title h2 {
-      font-family: 'Noto Serif SC', serif;
-      font-size: 36px;
-      font-weight: 600;
+    .section-header h2 {
+      font-size: 40px;
+      font-weight: 700;
       margin-bottom: 12px;
+      letter-spacing: -0.01em;
     }
 
-    .section-title p {
-      color: var(--color-text-muted);
+    .section-header p {
+      color: var(--text-secondary);
       font-size: 16px;
     }
 
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .feature-card {
-      padding: 28px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
       text-align: center;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
     }
 
     .feature-icon {
       width: 56px;
       height: 56px;
-      background: var(--color-accent-glow);
-      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.1));
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
-      margin: 0 auto 16px;
+      font-size: 26px;
+      margin: 0 auto 20px;
     }
 
     .feature-card h3 {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .feature-card p {
-      color: var(--color-text-muted);
-      font-size: 13px;
-      line-height: 1.6;
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.7;
     }
 
     /* Footer */
     footer {
       padding: 40px 0;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid var(--border);
       text-align: center;
     }
 
     footer p {
-      color: var(--color-text-muted);
+      color: var(--text-muted);
       font-size: 14px;
     }
 
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
     /* Responsive */
-    @media (max-width: 768px) {
-      .hero-header h1 {
-        font-size: 32px;
-      }
-
-      .product-card {
-        flex: 0 0 300px;
-      }
-
+    @media (max-width: 968px) {
       .features-grid {
         grid-template-columns: 1fr;
-        max-width: 400px;
+        max-width: 500px;
         margin: 0 auto;
+      }
+
+      nav {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .product-card {
+        flex: 0 0 320px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="bg-effects">
+    <div class="bg-gradient-1"></div>
+    <div class="bg-gradient-2"></div>
+    <div class="bg-gradient-3"></div>
+    <div class="bg-grid"></div>
+  </div>
+
   <header>
     <div class="container header-inner">
       <a href="#" class="logo">
-        <span class="logo-text">珠海换呗科技有限公司</span>
+        <div class="logo-icon">H</div>
+        <span class="logo-text">珠海换呗科技</span>
       </a>
       <nav>
         <a href="#products">产品</a>
@@ -397,75 +634,79 @@
     </div>
   </header>
 
-  <section class="hero" id="products">
+  <section class="hero">
     <div class="container">
-      <div class="hero-header">
-        <h1>我们的产品</h1>
-        <p class="hero-subtitle">致力于打造优质的软件工具和 AI 技能</p>
-      </div>
-
-      <div class="products-scroll">
-        <!-- Product 1: 天下无密 -->
-        <div class="product-card password">
-          <div class="product-icon">🔐</div>
-          <span class="tag">密码管理</span>
-          <h3>天下无密</h3>
-          <p>安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。</p>
-          <div class="product-links">
-            <a href="https://github.com/hlf2002/wumi" target="_blank" class="product-btn">
-              GitHub
-            </a>
-            <a href="https://hlf2002.github.io/wumi-web" target="_blank" class="product-btn secondary">
-              官网
-            </a>
-          </div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          专注软件创新
         </div>
+        <h1>
+          <span class="gradient">珠海换呗科技有限公司</span>
+        </h1>
+        <p class="hero-subtitle">
+          致力于打造优质的软件工具和 AI 技能，赋能智能化时代。我们坚持创新、安全、简洁的产品理念，为用户创造卓越的数字体验。
+        </p>
 
-        <!-- Product 2: 招聘 -->
-        <div class="product-card jobs">
-          <div class="product-icon">📢</div>
-          <span class="tag">热招职位</span>
-          <h3>加入我们</h3>
-          <p>我们正在寻找志同道合的伙伴，一起打造优秀的软件产品。</p>
-          <div class="job-list">
-            <div class="job-item">
-              <h4>前端开发工程师</h4>
-              <p class="salary">15K-30K · 珠海</p>
-              <div class="tags">
-                <span>React</span>
-                <span>TypeScript</span>
-                <span>Electron</span>
+        <div class="products-section" id="products">
+          <p class="section-label">我们的产品</p>
+          <div class="products-scroll">
+            <!-- Product 1: 天下无密 -->
+            <div class="product-card">
+              <div class="product-header">
+                <div class="product-icon">🔐</div>
+                <span class="product-tag">密码管理</span>
+              </div>
+              <h3>天下无密</h3>
+              <p>安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。</p>
+              <div class="product-links">
+                <a href="https://github.com/hlf2002/wumi" target="_blank" class="product-btn">
+                  查看 GitHub
+                </a>
               </div>
             </div>
-            <div class="job-item">
-              <h4>后端开发工程师</h4>
-              <p class="salary">20K-40K · 珠海</p>
-              <div class="tags">
-                <span>Node.js</span>
-                <span>Python</span>
-                <span>AI</span>
-              </div>
-            </div>
-            <div class="job-item">
-              <h4>AI 技能工程师</h4>
-              <p class="salary">25K-50K · 远程</p>
-              <div class="tags">
-                <span>LLM</span>
-                <span>Prompt</span>
-                <span>Agent</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Product 3: Coming Soon -->
-        <div class="product-card">
-          <div class="product-icon">🚀</div>
-          <span class="tag">即将推出</span>
-          <h3>更多产品</h3>
-          <p>我们正在开发更多优质的软件工具和 AI 技能，敬请期待...</p>
-          <div class="product-links">
-            <span style="color: var(--color-text-muted); font-size: 13px;">敬请期待</span>
+            <!-- Product 2: 招聘 -->
+            <div class="product-card jobs">
+              <div class="product-header">
+                <div class="product-icon">🚀</div>
+                <span class="product-tag">热招中</span>
+              </div>
+              <h3>加入我们</h3>
+              <p>寻找志同道合的伙伴，一起打造优秀的软件产品。</p>
+              <div class="job-list">
+                <div class="job-item">
+                  <h4>前端开发工程师</h4>
+                  <p class="salary">15K-30K · 珠海</p>
+                  <div class="tags">
+                    <span>React</span>
+                    <span>TypeScript</span>
+                    <span>Electron</span>
+                  </div>
+                </div>
+                <div class="job-item">
+                  <h4>AI 技能工程师</h4>
+                  <p class="salary">25K-50K · 远程</p>
+                  <div class="tags">
+                    <span>LLM</span>
+                    <span>Prompt</span>
+                    <span>Agent</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Product 3: Coming Soon -->
+            <div class="product-card coming">
+              <div class="product-header">
+                <div class="product-icon">✨</div>
+                <span class="product-tag">即将推出</span>
+              </div>
+              <h3>更多产品</h3>
+              <p>我们正在开发更多优质的软件工具和 AI 技能，敬请期待...</p>
+              <div class="product-links">
+                <span style="color: var(--text-muted); font-size: 13px;">敬请期待</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -474,7 +715,7 @@
 
   <section class="features" id="about">
     <div class="container">
-      <div class="section-title">
+      <div class="section-header">
         <h2>关于换呗科技</h2>
         <p>专注软件创新，赋能 AI 时代</p>
       </div>
@@ -500,7 +741,7 @@
 
   <footer>
     <div class="container">
-      <p>© 2024 珠海换呗科技有限公司 · <a href="https://github.com/hlf2002" target="_blank" style="color: var(--color-accent);">GitHub</a></p>
+      <p>© 2024 珠海换呗科技有限公司 · <a href="https://github.com/hlf2002" target="_blank">GitHub</a></p>
     </div>
   </footer>
 
