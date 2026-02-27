@@ -375,6 +375,29 @@
             animation: fadeIn 0.5s ease;
         }
 
+        .nav-buttons {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 24px;
+        }
+
+        .prev-btn {
+            padding: 10px 20px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .prev-btn:hover {
+            background: #f8f9fa;
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
         .question-card {
             background: var(--bg-white);
             border: 1px solid var(--border-color);
@@ -829,6 +852,11 @@
                         <div class="option-content">
                             <p id="optionBText"></p>
                         </div>
+                    </button>
+                </div>
+                <div class="nav-buttons">
+                    <button class="prev-btn" id="prevBtn" onclick="prevQuestion()" style="display: none;">
+                        ← 上一题
                     </button>
                 </div>
             </div>
@@ -1299,9 +1327,20 @@
             // 更新鼓励语录
             document.getElementById('encouragement').textContent = getEncouragement(progress);
 
-            // 清除之前的选择状态
+            // 显示/隐藏上一题按钮
+            const prevBtn = document.getElementById('prevBtn');
+            if (currentQuestion > 0) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            // 恢复当前题目的选择状态
             document.getElementById('optionA').classList.remove('selected');
             document.getElementById('optionB').classList.remove('selected');
+            if (answers[currentQuestion]) {
+                document.getElementById('option' + answers[currentQuestion]).classList.add('selected');
+            }
 
             // 显示淡入动画
             document.querySelector('.question-card').classList.add('fade-in');
@@ -1310,9 +1349,43 @@
             }, 600);
         }
 
+        // 返回上一题
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                // 移除当前题目的答案
+                const removedAnswer = answers.pop();
+                // 恢复分数
+                const dim = questions[currentQuestion].dim;
+                const preference = removedAnswer === 'A' ? dim.charAt(0) : dim.charAt(1);
+                scores[preference]--;
+
+                currentQuestion--;
+                showQuestion();
+                saveProgress();
+            }
+        }
+
+        // 保存进度到URL
+        function saveProgress() {
+            const url = new URL(window.location);
+            url.searchParams.set('q', currentQuestion + 1);
+            url.searchParams.set('a', answers.join(''));
+            url.searchParams.set('n', currentQuestionCount);
+            history.replaceState(null, '', url);
+        }
+
         // 选择选项 - 保存进度
         function selectOption(option) {
-            answers.push(option);
+            // 如果当前题目已经有答案，先移除旧答案的分数
+            if (answers[currentQuestion]) {
+                const oldAnswer = answers[currentQuestion];
+                const oldDim = questions[currentQuestion].dim;
+                const oldPreference = oldAnswer === 'A' ? oldDim.charAt(0) : oldDim.charAt(1);
+                scores[oldPreference]--;
+            }
+
+            // 设置新答案
+            answers[currentQuestion] = option;
 
             // 记录当前维度的分数
             const q = questions[currentQuestion];
@@ -1321,13 +1394,11 @@
             scores[preference]++;
 
             // 保存进度到URL
-            const url = new URL(window.location);
-            url.searchParams.set('q', currentQuestion + 1);
-            url.searchParams.set('a', answers.join(''));
-            url.searchParams.set('n', currentQuestionCount);
-            history.replaceState(null, '', url);
+            saveProgress();
 
             // 高亮选中项
+            document.getElementById('optionA').classList.remove('selected');
+            document.getElementById('optionB').classList.remove('selected');
             document.getElementById('option' + option).classList.add('selected');
 
             // 延迟进入下一题
