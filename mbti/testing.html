@@ -2,141 +2,152 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MBTI 性格测试 - 珠海换呗科技</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script>
-tailwind.config = {
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        "primary": "#4e6e5d",
-        "accent": "#d97706",
-        "background-light": "#fdfbf7",
-        "background-dark": "#1a1c1a",
-        "sage-light": "#e8edeb",
-        "warm-gray": "#71716a"
-      },
-      fontFamily: {
-        "display": ["Inter", "Noto Sans SC", "sans-serif"]
-      }
-    }
-  }
-}
-</script>
-<style>
-body { font-family: "Noto Sans SC", "Inter", sans-serif; }
-.scale-btn.selected { background-color: #4e6e5d; color: white; border-color: #4e6e5d; }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "warm-beige": "#F9F7F2",
+                        "sage-green": "#7A9478",
+                        "sage-light": "#F0F4F0",
+                        "muted-orange": "#E69A73",
+                        "muted-orange-light": "#FDF5F1",
+                        "text-main": "#3D4139",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            @apply bg-warm-beige text-text-main font-sans antialiased;
+        }
+        .likert-circle {
+            @apply transition-all duration-200 cursor-pointer flex items-center justify-center shrink-0;
+        }
+        .likert-circle:hover {
+            @apply scale-110;
+        }
+        .likert-circle.selected {
+            @apply ring-2 ring-offset-2;
+        }
+        .likert-circle[data-score="1"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="2"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="3"].selected { @apply bg-sage-green border-sage-green ring-sage-green; }
+        .likert-circle[data-score="4"].selected { @apply bg-gray-400 border-gray-400 ring-gray-400; }
+        .likert-circle[data-score="5"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .likert-circle[data-score="6"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .likert-circle[data-score="7"].selected { @apply bg-muted-orange border-muted-orange ring-muted-orange; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
 </head>
-<body class="bg-background-light font-display text-slate-900">
-<div class="min-h-screen flex flex-col">
-<!-- 导航栏 -->
-<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/90 backdrop-blur-md">
-<div class="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-<div class="flex items-center gap-3">
-<a href="https://www.7373.com.cn/mbti" class="flex items-center gap-3">
-<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<body class="min-h-screen flex flex-col">
+<header class="w-full bg-white/80 backdrop-blur-md border-b border-sage-green/10 px-6 py-4 sticky top-0 z-50">
+<div class="max-w-5xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="size-9 bg-sage-green rounded-xl flex items-center justify-center text-white">
 <span class="material-symbols-outlined text-2xl">psychology</span>
 </div>
-<span class="text-xl font-bold tracking-tight text-primary">MBTI 测试</span>
-</a>
+<a href="https://www.7373.com.cn/mbti" class="text-lg font-bold tracking-tight text-sage-green hover:opacity-80">MBTI 测试</a>
 </div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-sage-green transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+            退出测试
+        </button>
 </div>
 </header>
-
-<!-- 测试内容 -->
-<main class="flex-1 py-8 px-4">
-<div class="max-w-3xl mx-auto">
-<!-- 进度条 -->
-<div class="mb-8">
-<div class="flex justify-between items-center mb-2">
-<span class="text-sm font-medium text-warm-gray">题目 <span id="currentNum">1</span> / <span id="totalNum">60</span></span>
-<span class="text-sm font-medium text-primary" id="progressPercent">2%</span>
+<main class="flex-grow flex flex-col items-center pt-12 pb-20 px-6">
+<div class="w-full max-w-3xl">
+<div class="mb-12">
+<div class="flex justify-between items-center mb-3 px-1">
+<span class="text-sm font-medium text-sage-green">第 <span id="currentNum">1</span> 题，共 <span id="totalNum">64</span> 题</span>
+<span class="text-sm font-bold text-sage-green" id="progressPercent">2%</span>
 </div>
-<div class="h-2 bg-sage-light rounded-full overflow-hidden">
-<div id="progressFill" class="h-full bg-primary transition-all duration-300" style="width: 2%"></div>
+<div class="w-full h-2 bg-sage-light rounded-full overflow-hidden">
+<div class="h-full bg-sage-green transition-all duration-500" id="progressFill" style="width: 2%;"></div>
 </div>
 </div>
-
-<!-- 问题卡片 -->
-<div class="bg-white rounded-2xl shadow-lg p-8" id="questionCard">
-<div class="flex items-center gap-2 mb-6">
-<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium">第 <span id="questionNumber">1</span> 题</span>
-<span id="dimensionTag" class="px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm">外向 vs 内向</span>
+<div class="bg-white rounded-2xl shadow-sm border border-sage-green/5 p-10 md:p-20 mb-12">
+<div class="text-center">
+<h2 class="text-2xl md:text-3xl font-bold text-text-main leading-relaxed mb-16" id="questionText">
+                    ""
+                </h2>
+<div class="flex flex-col items-center gap-8">
+<div class="flex items-center justify-between w-full max-w-2xl">
+<span class="text-sage-green font-bold text-lg hidden md:block w-16 text-left">同意</span>
+<div class="flex items-center justify-between flex-1 px-4 md:px-12">
+<button onclick="selectScore(1)" class="likert-circle size-14 md:size-16 rounded-full border-2 border-sage-green bg-sage-light/50 hover:bg-sage-light" data-score="1" title="非常同意"></button>
+<button onclick="selectScore(2)" class="likert-circle size-11 md:size-12 rounded-full border-2 border-sage-green/60 hover:bg-sage-light" data-score="2" title="同意"></button>
+<button onclick="selectScore(3)" class="likert-circle size-8 md:size-9 rounded-full border-2 border-sage-green/30 hover:bg-sage-light" data-score="3" title="略微同意"></button>
+<button onclick="selectScore(4)" class="likert-circle size-6 md:size-7 rounded-full border-2 border-gray-300 bg-gray-50" data-score="4" title="中立"></button>
+<button onclick="selectScore(5)" class="likert-circle size-8 md:size-9 rounded-full border-2 border-muted-orange/30 hover:bg-muted-orange-light" data-score="5" title="略微反对"></button>
+<button onclick="selectScore(6)" class="likert-circle size-11 md:size-12 rounded-full border-2 border-muted-orange/60 hover:bg-muted-orange-light" data-score="6" title="反对"></button>
+<button onclick="selectScore(7)" class="likert-circle size-14 md:size-16 rounded-full border-2 border-muted-orange bg-muted-orange-light/50 hover:bg-muted-orange-light" data-score="7" title="非常反对"></button>
 </div>
-<div class="text-xl font-bold text-slate-900 mb-8" id="questionText"></div>
-
-<!-- 7分量表 -->
-<div class="mb-8">
-<div class="flex justify-between text-xs text-warm-gray mb-3">
-<span class="font-medium">反对</span>
-<span class="font-medium">同意</span>
+<span class="text-muted-orange font-bold text-lg hidden md:block w-16 text-right">反对</span>
 </div>
-<div class="flex justify-between gap-2" id="scaleButtons">
-<button onclick="selectScore(1)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="1">1</button>
-<button onclick="selectScore(2)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="2">2</button>
-<button onclick="selectScore(3)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="3">3</button>
-<button onclick="selectScore(4)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="4">4</button>
-<button onclick="selectScore(5)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="5">5</button>
-<button onclick="selectScore(6)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="6">6</button>
-<button onclick="selectScore(7)" class="scale-btn flex-1 py-4 rounded-lg border-2 border-slate-200 font-bold text-sm hover:border-primary transition-all" data-score="7">7</button>
-</div>
-<div class="flex justify-between text-xs text-warm-gray mt-2">
-<span class="text-center">完全不同意</span>
-<span class="text-center">完全同意</span>
+<div class="flex justify-between w-full px-2 md:hidden">
+<span class="text-sage-green font-bold text-sm">同意</span>
+<span class="text-gray-400 font-medium text-sm">中立</span>
+<span class="text-muted-orange font-bold text-sm">反对</span>
 </div>
 </div>
-
-<!-- 导航按钮 -->
-<div class="flex justify-between">
-<button onclick="prevQuestion()" id="prevBtn" class="px-6 py-3 rounded-xl border border-slate-200 text-slate-600 hover:border-primary hover:text-primary transition-all hidden">
-← 上一题
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6">
+<div class="flex justify-start order-2 md:order-1">
+<button onclick="prevQuestion()" class="w-full md:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-gray-400 font-medium hover:text-sage-green hover:bg-sage-light/50 transition-all group">
+<span class="material-symbols-outlined text-xl transition-transform group-hover:-translate-x-1">arrow_back</span>
+                    上一题
+                </button>
+</div>
+<div class="flex justify-center order-1 md:order-2">
+<p class="text-sm text-gray-400 font-medium text-center">
+                    请诚实回答，尽量不要选择“中立”。
+                </p>
+</div>
+<div class="flex justify-end order-3 md:order-3">
+<button onclick="nextQuestion()" class="w-full md:w-auto flex items-center justify-center gap-2 px-10 py-3.5 rounded-xl bg-sage-green text-white font-bold hover:brightness-110 shadow-lg shadow-sage-green/20 transition-all group">
+                    下一题
+                    <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1">arrow_forward</span>
 </button>
-<div></div>
-<button onclick="nextQuestion()" id="nextBtn" class="px-8 py-3 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all">
-下一题 →
-</button>
 </div>
-</div>
-
-<!-- 完成页面 -->
-<div class="bg-white rounded-2xl shadow-lg p-8 text-center" id="completeCard" style="display: none;">
-<div class="mb-6">
-<div class="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-5xl text-primary">check_circle</span>
-</div>
-</div>
-<h2 class="text-2xl font-bold text-slate-900 mb-4">测试完成！</h2>
-<p class="text-warm-gray mb-8">感谢您完成测试，点击下方按钮查看您的结果</p>
-<button onclick="showResult()" class="px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">
-查看结果
-</button>
 </div>
 </div>
 </main>
-
-<!-- 页脚 -->
-<footer class="border-t border-primary/10 bg-white py-6">
-<div class="mx-auto max-w-4xl px-6 text-center">
-<p class="text-xs text-warm-gray">© 2024 珠海换呗科技有限公司 | 基于科学的人格测评工具</p>
+<footer class="py-12 px-6">
+<div class="max-w-3xl mx-auto text-center">
+<p class="text-[11px] md:text-xs text-gray-400 leading-relaxed tracking-wide">
+            © 2024 MBTI 测评研究室 · 粤ICP备XXXXXXXX号<br/>
+            基于 Carl Jung 与 Isabel Myers 的理论研究，为您提供专业的性格洞察。
+        </p>
 </div>
 </footer>
-</div>
 
 <script>
-// 60道MBTI测试题目
+// 64道MBTI测试题目
 const questions = [
-    // E vs I (15题)
+    // E vs I (16题) - 外向 vs 内向
     { dim: 'EI', text: '在社交聚会中，我通常是活跃气氛的那个人' },
     { dim: 'EI', text: '我更喜欢与很多人一起活动，而不是独处' },
     { dim: 'EI', text: '我倾向于用口头表达而不是书面表达来分享想法' },
     { dim: 'EI', text: '与他人交流能让我感到充满能量' },
     { dim: 'EI', text: '我很容易和陌生人打开话题交谈' },
     { dim: 'EI', text: '我更喜欢在团队中合作而不是独自工作' },
-    { dim: 'EI', text: '空闲时间我更愿意参加社交活动' },
+    { dim: 'EI', text: '空闲时间我更愿意参加社交活动而不是独自待着' },
     { dim: 'EI', text: '我倾向于先说再做，而不是先想后说' },
     { dim: 'EI', text: '我更喜欢开放热闹的工作环境' },
     { dim: 'EI', text: '我容易通过交谈来理解问题' },
@@ -145,8 +156,9 @@ const questions = [
     { dim: 'EI', text: '我倾向于结交许多新朋友' },
     { dim: 'EI', text: '我的兴奋情绪会明显地表现在外面' },
     { dim: 'EI', text: '我更喜欢广度接触各类事物而不是深度钻研' },
+    { dim: 'EI', text: '与陌生人交谈让我感到兴奋而不是紧张' },
 
-    // S vs N (15题)
+    // S vs N (16题) - 感觉 vs 直觉
     { dim: 'SN', text: '我更关注事物的具体事实和细节' },
     { dim: 'SN', text: '我更喜欢实实在在的技能而不是抽象的理论' },
     { dim: 'SN', text: '解决问题时我倾向于使用经过验证的经验方法' },
@@ -154,16 +166,17 @@ const questions = [
     { dim: 'SN', text: '我更相信亲眼所见的事实而不是直觉' },
     { dim: 'SN', text: '学习新事物时，我会先了解具体操作方法' },
     { dim: 'SN', text: '我更看重实际经验和技能' },
-    { dim: 'SN', text: '我更喜欢按部就班的工作而不是富有变化的' },
+    { dim: 'SN', text: '我喜欢按部就班的工作而不是富有变化的' },
     { dim: 'SN', text: '我更容易理解具体可感的事物' },
-    { dim: 'SN', text: '我更倾向于描述具体细节而不是整体印象' },
-    { dim: 'SN', text: '我更喜欢传统可靠的方法而不是新颖独特的方式' },
+    { dim: 'SN', text: '我倾向于描述具体细节而不是整体印象' },
+    { dim: 'SN', text: '我喜欢传统可靠的方法而不是新颖独特的方式' },
     { dim: 'SN', text: '我更容易看到事物的现状而不是预见未来可能' },
-    { dim: 'SN', text: '我更喜欢确定已知的事物而不是探索未知领域' },
+    { dim: 'SN', text: '我喜欢确定已知的事物而不是探索未知领域' },
     { dim: 'SN', text: '我更容易发现细节问题而不是整体趋势' },
     { dim: 'SN', text: '我决策时更依赖过往的数据和信息' },
+    { dim: 'SN', text: '我更关注现在而不是未来的可能性' },
 
-    // T vs F (15题)
+    // T vs F (16题) - 思考 vs 情感
     { dim: 'TF', text: '做决定时我更看重逻辑和客观分析' },
     { dim: 'TF', text: '当我不同意某人时，我会直接指出问题' },
     { dim: 'TF', text: '我更容易被有逻辑的论点说服' },
@@ -179,8 +192,9 @@ const questions = [
     { dim: 'TF', text: '当我安慰别人时，我会分析问题给出建议' },
     { dim: 'TF', text: '我更容易被理性的分析打动而不是真诚的情感' },
     { dim: 'TF', text: '工作中我更注重任务完成的质量而不是团队氛围' },
+    { dim: 'TF', text: '我倾向于用逻辑说服别人而不是用情感打动人' },
 
-    // J vs P (15题)
+    // J vs P (16题) - 判断 vs 知觉
     { dim: 'JP', text: '面对重要任务，我会先制定详细计划再行动' },
     { dim: 'JP', text: '我更喜欢按部就班、有清晰步骤的工作方式' },
     { dim: 'JP', text: '当别人问我问题时，我倾向于给出一个明确的答案' },
@@ -189,21 +203,15 @@ const questions = [
     { dim: 'JP', text: '我更喜欢提前规划好行程而不是随性走到哪算哪' },
     { dim: 'JP', text: '做决定时我倾向于尽快做出决定并执行' },
     { dim: 'JP', text: '当我列出待办清单，我会严格按照清单完成' },
-    { dim: 'JP', text: '我更喜欢稳定可预测的生活节奏' },
+    { dim: 'JP', text: '我喜欢稳定可预测的生活节奏' },
     { dim: 'JP', text: '面对规则和制度，我会尊重并严格执行' },
     { dim: 'JP', text: '我更倾向于在截止日期前预留充足时间完成工作' },
     { dim: 'JP', text: '我更看重工作中的明确目标而不是自由发挥空间' },
     { dim: 'JP', text: '我更希望别人评价我可靠、守时、言出必行' },
     { dim: 'JP', text: '面对生活中的不确定性，我会尽量减少不确定因素' },
-    { dim: 'JP', text: '我更喜欢完成一件事带来的成就感而不是开始新事物带来的兴奋感' }
+    { dim: 'JP', text: '我喜欢完成一件事带来的成就感而不是开始新事物带来的兴奋感' },
+    { dim: 'JP', text: '我习惯把事情做完后再开始新的事情，而不是同时进行多项任务' }
 ];
-
-const dimensionNames = {
-    'EI': '外向 vs 内向',
-    'SN': '感觉 vs 直觉',
-    'TF': '思考 vs 情感',
-    'JP': '判断 vs 知觉'
-};
 
 // 存储答案
 let answers = {};
@@ -235,43 +243,21 @@ function showQuestion() {
 
     document.getElementById('currentNum').textContent = q;
     document.getElementById('totalNum').textContent = questions.length;
-    document.getElementById('questionNumber').textContent = q;
-    document.getElementById('questionText').textContent = question.text;
-    document.getElementById('dimensionTag').textContent = dimensionNames[question.dim];
+    document.getElementById('questionText').textContent = '"' + question.text + '"';
 
     const progress = (q / questions.length) * 100;
     document.getElementById('progressFill').style.width = progress + '%';
     document.getElementById('progressPercent').textContent = Math.round(progress) + '%';
 
     // 恢复之前的选择
-    document.querySelectorAll('.scale-btn').forEach(btn => {
-        btn.classList.remove('selected', 'bg-primary', 'text-white', 'border-primary');
+    document.querySelectorAll('.likert-circle').forEach(btn => {
+        btn.classList.remove('selected');
     });
     if (answers[q]) {
         const selectedBtn = document.querySelector(`[data-score="${answers[q]}"]`);
         if (selectedBtn) {
-            selectedBtn.classList.add('selected', 'bg-primary', 'text-white', 'border-primary');
+            selectedBtn.classList.add('selected');
         }
-    }
-
-    // 显示/隐藏上一题按钮
-    document.getElementById('prevBtn').classList.toggle('hidden', q === 1);
-
-    // 如果是最后一题，显示完成按钮
-    if (q === questions.length) {
-        document.getElementById('nextBtn').textContent = '完成测试';
-    } else {
-        document.getElementById('nextBtn').textContent = '下一题 →';
-    }
-
-    // 隐藏问题卡片/显示完成卡片
-    const completedCount = Object.keys(answers).length;
-    if (completedCount === questions.length) {
-        document.getElementById('questionCard').style.display = 'none';
-        document.getElementById('completeCard').style.display = 'block';
-    } else {
-        document.getElementById('questionCard').style.display = 'block';
-        document.getElementById('completeCard').style.display = 'none';
     }
 }
 
@@ -281,13 +267,15 @@ function selectScore(score) {
     answers[q] = score;
     saveAnswers();
 
-    // 更新UI
-    document.querySelectorAll('.scale-btn').forEach(btn => {
-        btn.classList.remove('selected', 'bg-primary', 'text-white', 'border-primary');
+    // 移除所有选中状态
+    document.querySelectorAll('.likert-circle').forEach(btn => {
+        btn.classList.remove('selected');
     });
+
+    // 添加选中状态
     const selectedBtn = document.querySelector(`[data-score="${score}"]`);
     if (selectedBtn) {
-        selectedBtn.classList.add('selected', 'bg-primary', 'text-white', 'border-primary');
+        selectedBtn.classList.add('selected');
     }
 
     // 自动进入下一题
@@ -295,9 +283,9 @@ function selectScore(score) {
         if (q < questions.length) {
             goToQuestion(q + 1);
         } else {
-            showQuestion();
+            showResult();
         }
-    }, 200);
+    }, 300);
 }
 
 // 前往指定题目
@@ -316,20 +304,14 @@ function prevQuestion() {
 // 下一题
 function nextQuestion() {
     const q = getCurrentQuestion();
+    if (!answers[q]) {
+        alert('请选择一个选项');
+        return;
+    }
     if (q < questions.length) {
-        // 检查是否已回答
-        if (!answers[q]) {
-            alert('请选择一个选项');
-            return;
-        }
         goToQuestion(q + 1);
     } else {
-        // 完成测试
-        if (!answers[q]) {
-            alert('请选择一个选项');
-            return;
-        }
-        showQuestion();
+        showResult();
     }
 }
 
@@ -337,43 +319,26 @@ function nextQuestion() {
 function showResult() {
     // 计算各维度得分
     let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
-    let counts = { EI: 0, SN: 0, TF: 0, JP: 0 };
 
     questions.forEach((q, index) => {
         const answer = answers[index + 1];
         if (answer) {
-            // 7分制：1=E/S/T/J, 7=I/N/F/P, 4=中性
-            // 维度得分：高分偏向第二个字母
-            let score = 0;
-            if (answer < 4) {
-                score = 4 - answer; // 3->1, 2->2, 1->3
-            } else if (answer > 4) {
-                score = answer - 4; // 5->1, 6->2, 7->3
-            }
-
-            counts[q.dim]++;
-
+            // 7分制：1-3偏向第一个字母(E/S/T/J)，5-7偏向第二个字母(I/N/F/P)，4是中性
             if (q.dim === 'EI') {
-                if (answer <= 3) scores.E += score;
-                else if (answer >= 5) scores.I += score;
+                if (answer <= 3) scores.E += (4 - answer);
+                else if (answer >= 5) scores.I += (answer - 4);
             } else if (q.dim === 'SN') {
-                if (answer <= 3) scores.S += score;
-                else if (answer >= 5) scores.N += score;
+                if (answer <= 3) scores.S += (4 - answer);
+                else if (answer >= 5) scores.N += (answer - 4);
             } else if (q.dim === 'TF') {
-                if (answer <= 3) scores.T += score;
-                else if (answer >= 5) scores.F += score;
+                if (answer <= 3) scores.T += (4 - answer);
+                else if (answer >= 5) scores.F += (answer - 4);
             } else if (q.dim === 'JP') {
-                if (answer <= 3) scores.J += score;
-                else if (answer >= 5) scores.P += score;
+                if (answer <= 3) scores.J += (4 - answer);
+                else if (answer >= 5) scores.P += (answer - 4);
             }
         }
     });
-
-    // 计算百分比
-    const eiPercent = Math.round((scores.I / 15) * 100);
-    const snPercent = Math.round((scores.N / 15) * 100);
-    const tfPercent = Math.round((scores.F / 15) * 100);
-    const jpPercent = Math.round((scores.P / 15) * 100);
 
     // 确定类型
     let mbti = '';
@@ -390,5 +355,5 @@ function showResult() {
 loadAnswers();
 showQuestion();
 </script>
-</body>
-</html>
+
+</body></html>
