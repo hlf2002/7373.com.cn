@@ -2,6 +2,15 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI性格测试 - 64道题精准分析 | 珠海换呗科技</title>
+<meta name="description" content="开始您的MBTI性格测试，64道科学题目精准分析您的人格类型。探索16种MBTI人格，发现真实的自己。"/>
+<meta name="keywords" content="MBTI测试,性格测试,人格测评,在线测试,心理测评,16型人格"/>
+<meta name="robots" content="noindex,follow"/>
+<meta property="og:title" content="MBTI性格测试 - 64道题精准分析"/>
+<meta property="og:description" content="开始您的MBTI性格测试，64道科学题目精准分析您的人格类型。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://mbti.7373.com.cn/testing.html"/>
+<link rel="canonical" href="https://mbti.7373.com.cn/testing.html"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -61,7 +70,7 @@
 <div class="size-9 bg-sage-green rounded-xl flex items-center justify-center text-white">
 <span class="material-symbols-outlined text-2xl">psychology</span>
 </div>
-<a href="https://www.7373.com.cn/mbti" class="text-lg font-bold tracking-tight text-sage-green hover:opacity-80">MBTI 测试</a>
+<a href="https://mbti.7373.com.cn/mbti" class="text-lg font-bold tracking-tight text-sage-green hover:opacity-80">MBTI性格测试</a>
 </div>
 <button class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-gray-500 hover:text-sage-green transition-colors">
 <span class="material-symbols-outlined text-[20px]">logout</span>
@@ -131,7 +140,7 @@
 <footer class="py-12 px-6">
 <div class="max-w-3xl mx-auto text-center">
 <p class="text-[11px] md:text-xs text-gray-400 leading-relaxed tracking-wide">
-            © 2024 珠海换呗科技有限公司 · 粤ICP备2026020205号<br/>
+            © 2024 珠海换呗科技有限公司 · <a href="https://beian.miit.gov.cn/" target="_blank" class="hover:underline">粤ICP备2026020205号</a><br/>
             基于 Carl Jung 与 Isabel Myers 的理论研究，为您提供专业的性格洞察。
         </p>
 </div>
@@ -159,15 +168,15 @@ const questions = [
     { dim: 'EI', text: '与陌生人交谈让我感到兴奋而不是紧张' },
 
     // S vs N (16题) - 感觉 vs 直觉
-    { dim: 'SN', text: '我更关注事物的具体事实和细节' },
+    { dim: 'SN', text: '我更关注事物的具体事实和细节，而不是抽象的概念' },
     { dim: 'SN', text: '我更喜欢实实在在的技能而不是抽象的理论' },
     { dim: 'SN', text: '解决问题时我倾向于使用经过验证的经验方法' },
-    { dim: 'SN', text: '我更容易记住具体的事情和数据' },
+    { dim: 'SN', text: '我更容易记住具体的事情和数据，而不是抽象的概念' },
     { dim: 'SN', text: '我更相信亲眼所见的事实而不是直觉' },
     { dim: 'SN', text: '学习新事物时，我会先了解具体操作方法' },
-    { dim: 'SN', text: '我更看重实际经验和技能' },
+    { dim: 'SN', text: '我更看重实际经验和技能，而不是抽象的理论' },
     { dim: 'SN', text: '我喜欢按部就班的工作而不是富有变化的' },
-    { dim: 'SN', text: '我更容易理解具体可感的事物' },
+    { dim: 'SN', text: '我更容易理解具体可感的事物，而不是抽象的概念' },
     { dim: 'SN', text: '我倾向于描述具体细节而不是整体印象' },
     { dim: 'SN', text: '我喜欢传统可靠的方法而不是新颖独特的方式' },
     { dim: 'SN', text: '我更容易看到事物的现状而不是预见未来可能' },
@@ -177,13 +186,13 @@ const questions = [
     { dim: 'SN', text: '我更关注现在而不是未来的可能性' },
 
     // T vs F (16题) - 思考 vs 情感
-    { dim: 'TF', text: '做决定时我更看重逻辑和客观分析' },
+    { dim: 'TF', text: '做决定时我更看重逻辑和客观分析，而不是个人情感' },
     { dim: 'TF', text: '当我不同意某人时，我会直接指出问题' },
-    { dim: 'TF', text: '我更容易被有逻辑的论点说服' },
+    { dim: 'TF', text: '我更容易被有逻辑的论点说服，而不是被情感打动' },
     { dim: 'TF', text: '在争论中我更倾向于坚持原则，对事不对人' },
-    { dim: 'TF', text: '评价一件事时我更在意是否公平合理' },
+    { dim: 'TF', text: '评价一件事时我更在意是否公平合理，而不是是否让人愉快' },
     { dim: 'TF', text: '我更容易客观地分析情况而不是设身处地理解他人' },
-    { dim: 'TF', text: '我更欣赏理性思考的能力' },
+    { dim: 'TF', text: '我更欣赏理性思考的能力，而不是感性的直觉' },
     { dim: 'TF', text: '做决定时我倾向于先思考再行动' },
     { dim: 'TF', text: '我更容易指出别人的错误而不是照顾别人的情绪' },
     { dim: 'TF', text: '我看重效率和结果而不是过程中的关系' },
@@ -205,9 +214,9 @@ const questions = [
     { dim: 'JP', text: '当我列出待办清单，我会严格按照清单完成' },
     { dim: 'JP', text: '我喜欢稳定可预测的生活节奏' },
     { dim: 'JP', text: '面对规则和制度，我会尊重并严格执行' },
-    { dim: 'JP', text: '我更倾向于在截止日期前预留充足时间完成工作' },
+    { dim: 'JP', text: '我更倾向于在截止日期前预留充足时间完成工作，而不是等到最后一刻' },
     { dim: 'JP', text: '我更看重工作中的明确目标而不是自由发挥空间' },
-    { dim: 'JP', text: '我更希望别人评价我可靠、守时、言出必行' },
+    { dim: 'JP', text: '我更希望别人评价我可靠、守时、言出必行，而不是有创意、灵活' },
     { dim: 'JP', text: '面对生活中的不确定性，我会尽量减少不确定因素' },
     { dim: 'JP', text: '我喜欢完成一件事带来的成就感而不是开始新事物带来的兴奋感' },
     { dim: 'JP', text: '我习惯把事情做完后再开始新的事情，而不是同时进行多项任务' }
@@ -348,7 +357,7 @@ function showResult() {
     mbti += scores.J >= scores.P ? 'J' : 'P';
 
     // 跳转到首页显示结果
-    window.location.href = 'https://www.7373.com.cn/mbti?result=' + mbti;
+    window.location.href = 'https://mbti.7373.com.cn/mbti?result=' + mbti;
 }
 
 // 初始化

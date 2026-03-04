@@ -2,7 +2,18 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MBTI 首页 - 温暖亲和</title>
+<title>MBTI性格测试 | 免费在线人格测评 - 珠海换呗科技</title>
+<meta name="description" content="免费MBTI性格测试，64道科学题目精准分析您的16种人格类型。了解真实的自己，发现内在潜能。无需注册，立即测试！"/>
+<meta name="keywords" content="MBTI,MBTI测试,性格测试,人格测评,16种人格类型,INTJ,INTP,ENTJ,ENTP,INFJ,INFP,ENFJ,ENFP,ISTJ,ISFJ,ESTJ,ESFJ,ISTP,ISFP,ESTP,ESFP,心理测试"/>
+<meta name="author" content="珠海换呗科技有限公司"/>
+<meta name="robots" content="index,follow"/>
+<meta property="og:title" content="MBTI性格测试 | 免费在线人格测评"/>
+<meta property="og:description" content="免费MBTI性格测试，64道科学题目精准分析您的16种人格类型。了解真实的自己，发现内在潜能。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://mbti.7373.com.cn"/>
+<meta property="og:site_name" content="珠海换呗科技MBTI测试"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="canonical" href="https://mbti.7373.com.cn"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -45,9 +56,6 @@
 <span>开始测试</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </button>
-<div class="h-10 w-10 rounded-full bg-sage-light dark:bg-slate-800 flex items-center justify-center border border-primary/10 overflow-hidden">
-<img class="h-full w-full object-cover" data-alt="用户头像" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2Z8MJpJuA4NTNkjdHV4Y_lfOqEXLPbAlp6-prK0Ab49gJ_V_0ggDOh2fi2KXyJWiffHLcX54l93Nj0lYN_eewAAV0QEfzXEbRetUJOz8beV4cte2m-5fPAERraxN1Wj1sCpTpT8eKAQoE720Sn1x9KgdzRVIjXjt9Y8kdUDB7oik15ewxqP0sFUBwdpg3gTifbWAJG1A4Xz6iXuQMxykg6HoqANf3LTnKH43etz99ufm5y6sC0tx9DrCG9rNk4nH6unJAOjVFYgU"/>
-</div>
 </div>
 </div>
 </header>
@@ -107,7 +115,7 @@
                             每一种人格都是独一无二的。浏览四大核心类别，寻找属于您或您所爱之人的心灵归属。
                         </p>
 <div class="mt-10 inline-flex rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-sm border border-primary/10">
-<button onclick="filterTypes('analyst')" class="category-btn rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
+<button onclick="filterTypes('analyst')" data-category-init="analyst" class="category-btn rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
 <button onclick="filterTypes('diplomat')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">外交官</button>
 <button onclick="filterTypes('sentinel')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">守护者</button>
 <button onclick="filterTypes('explorer')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">探险家</button>
@@ -398,7 +406,7 @@
 </div>
 </div>
 <p class="mt-8 text-center text-xs text-warm-gray/60 dark:text-slate-500">
-                    © 2024 珠海换呗科技有限公司。保留所有权利。与 Myers &amp; Briggs 基金会无关。&nbsp;&nbsp;&nbsp;&nbsp;粤ICP备2026020205号
+                    © 2024 珠海换呗科技有限公司。保留所有权利。与 Myers &amp; Briggs 基金会无关。&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://beian.miit.gov.cn/" target="_blank" class="hover:underline">粤ICP备2026020205号</a>
                 </p>
 </div>
 </footer>
@@ -410,8 +418,16 @@ function filterTypes(category) {
         btn.classList.remove('bg-primary', 'text-white');
         btn.classList.add('text-warm-gray');
     });
-    event.target.classList.add('bg-primary', 'text-white');
-    event.target.classList.remove('text-warm-gray');
+
+    // 添加选中状态
+    if (event) {
+        event.target.classList.add('bg-primary', 'text-white');
+        event.target.classList.remove('text-warm-gray');
+    } else {
+        // 默认加载时，给第一个按钮添加选中状态
+        document.querySelector('[data-category-init="analyst"]').classList.add('bg-primary', 'text-white');
+        document.querySelector('[data-category-init="analyst"]').classList.remove('text-warm-gray');
+    }
 
     // 筛选卡片
     document.querySelectorAll('.type-card').forEach(function(card) {
@@ -422,5 +438,8 @@ function filterTypes(category) {
         }
     });
 }
+
+// 默认显示分析家
+filterTypes('analyst');
 </script>
 </body></html>
