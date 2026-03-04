@@ -36,7 +36,7 @@
 <h2 class="text-xl font-bold tracking-tight text-primary dark:text-primary">MBTI 首页</h2>
 </div>
 <nav class="hidden md:flex items-center gap-10">
-<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#types">人格类型</a>
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">文章</a>
 <a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#">联系我们</a>
 </nav>
@@ -99,7 +99,7 @@
 </div>
 </div>
 </section>
-<section class="bg-sage-light/50 dark:bg-background-dark/50 py-20">
+<section class="bg-sage-light/50 dark:bg-background-dark/50 py-20" id="types">
 <div class="mx-auto max-w-7xl px-6 lg:px-10">
 <div class="mb-12 flex flex-col items-center text-center">
 <h2 class="text-3xl font-bold text-slate-900 dark:text-slate-50">探索 16 种人格类型</h2>
@@ -107,14 +107,15 @@
                             每一种人格都是独一无二的。浏览四大核心类别，寻找属于您或您所爱之人的心灵归属。
                         </p>
 <div class="mt-10 inline-flex rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-sm border border-primary/10">
-<button class="rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">外交官</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">守护者</button>
-<button class="rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">探险家</button>
+<button onclick="filterTypes('analyst')" class="category-btn rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
+<button onclick="filterTypes('diplomat')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">外交官</button>
+<button onclick="filterTypes('sentinel')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">守护者</button>
+<button onclick="filterTypes('explorer')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">探险家</button>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
+<!-- 分析家类型 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
 <div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
 <img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="建筑师 INTJ 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY"/>
 </div>
@@ -129,7 +130,7 @@
                                 了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 </div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
 <div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
 <img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="逻辑学家 INTP 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD00r3YTFpSgcXaHhJRRaXW-LdIecgXo2w0iaT1uftsYLLLtLPe7WCpXbyrJrmURJF1sEIhkzRW3XLBEnSUqzArZm09CjISgdxmfUpjiD2zqguBlXFQOyWBUcnWhcYSLgStRKRCdt3uCzJVT1o2a6IRYSh5OHN0qe9KTZBNZtdqFMwzFZK_--Hsy0cdHENipgZZeY1QKaiZRruvJ-gmESQ_tBmJpJJ9QmAfp4-cK9AnoczxvDwKXmbzlaWgl6ZIEHedqpumRfY6PY"/>
 </div>
@@ -144,7 +145,7 @@
                                 了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 </div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
 <div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
 <img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="指挥官 ENTJ 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2WbaSGcXcFAtcpu74Kaxa5TTMY-xviTY5ehanrUyT27oV_dx8tX_G3RI9kuvUokCj7R7ZDKVp2pdKBml40ae2u9Lbj55u-Z_IinwJ1N9oSA8AcNig2zJdlMJVJlPzyAYTwoBzGLwMU2dOF2RyF2DCR-6PT69RTTjC9Y8-y0kKLTpBmvgvLvSuW4qg5d9q__VkKkZVjYtzfxd_Fk91AP8QbFCYL0RYakR9eWSbQJdFmW_a3O1wQEQI4-xzKnkmVwPwWgrH5Gx2-j0"/>
 </div>
@@ -159,7 +160,7 @@
                                 了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 </div>
-<div class="group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1">
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="analyst">
 <div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
 <img class="h-4/5 w-4/5 object-contain group-hover:scale-110 transition-transform" data-alt="辩论家 ENTP 人格角色图标" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaHAwDxdo-joHrExovugPL0sjg7UyC3oOTpmnJdLkM6cimtlRqPQI-YFPmTWDRt4g3rOFKq0dca9cYl8PA3z5oGWZAPPNaSShgCAPOX46JqiSZ3PxlwRbHl0UMJomQqhQUfKzCm12PqBQN-oloNaEbmZqYXmr5r47T-Mi6eeiQZgFYhbQIPbPEoW4YX885hgJyGkfOI-8v0Cr_c8BVZhAPuXrJMdfVvQcUGYBumX1uK8X2E7JEPZsQManej0yA77J8eI-GcvZYZCE"/>
 </div>
@@ -172,6 +173,189 @@
 </div>
 <a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
                                 了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- 外交官类型 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🌟</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">提倡者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INFJ-A / INFJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+安静而坚定的理想主义者，始终坚守自己的原则。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎨</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">调停者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">INFP-A / INFP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+富有诗意的善良者，始终在寻找生命的意义。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">👑</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">主人公</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENFJ-A / ENFJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+富有魅力的领导者，能够启发和激励他人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="diplomat">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎉</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">竞选者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ENFP-A / ENFP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+热情洋溢的创意者，总是寻找支持他人的方式。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- 守护者类型 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">📋</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">物流师</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISTJ-A / ISTJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+务实且注重事实的可靠者，可以信赖他们完成任务。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🛡️</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">守卫者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISFJ-A / ISFJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+非常专注且温暖的守护者，总是时刻准备保护他人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🏢</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">总经理</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESTJ-A / ESTJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+出色的管理者，在组织和管理方面天赋异禀。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="sentinel">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎭</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">执政官</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESFJ-A / ESFJ-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+出色的照顾者，喜欢帮助和支持身边的人。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- 探险家类型 -->
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🔧</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">鉴赏家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISTP-A / ISTP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+大胆而实用的实验者，是解决难题的专家。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎸</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">探险家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ISFP-A / ISFP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+灵活有魅力的艺术家，随时准备探索和新体验。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">⚡</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">企业家</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESTP-A / ESTP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+聪明、精力充沛的冒险者，善于分析形势。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="type-card group flex flex-col gap-5 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-primary/5 transition-all hover:shadow-xl hover:-translate-y-1" data-category="explorer">
+<div class="aspect-square w-full rounded-xl bg-background-light dark:bg-slate-700/50 flex items-center justify-center overflow-hidden">
+<span class="text-5xl">🎤</span>
+</div>
+<div class="space-y-1">
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">表演者</h3>
+<p class="text-sm font-medium text-primary uppercase tracking-wide">ESFP-A / ESFP-T</p>
+<p class="mt-2 text-sm leading-relaxed text-warm-gray dark:text-slate-400">
+自发、精力充沛的表演者，喜欢带给别人欢乐。
+</p>
+</div>
+<a class="mt-auto flex items-center gap-1 text-sm font-bold text-primary group-hover:gap-2 transition-all" href="#">
+了解更多 <span class="material-symbols-outlined text-sm">arrow_forward</span>
 </a>
 </div>
 </div>
@@ -219,4 +403,24 @@
 </div>
 </footer>
 </div>
+<script>
+function filterTypes(category) {
+    // 更新按钮状态
+    document.querySelectorAll('.category-btn').forEach(function(btn) {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('text-warm-gray');
+    });
+    event.target.classList.add('bg-primary', 'text-white');
+    event.target.classList.remove('text-warm-gray');
+
+    // 筛选卡片
+    document.querySelectorAll('.type-card').forEach(function(card) {
+        if (card.dataset.category === category) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+</script>
 </body></html>
