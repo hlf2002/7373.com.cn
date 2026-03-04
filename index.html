@@ -1,526 +1,289 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>珠海换呗科技有限公司</title>
-  <link rel="preconnect" href="https://fonts.googleapis.cn">
-  <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
-  <link href="https://fonts.googleapis.cn/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-primary: #08080a;
-      --bg-secondary: #0f0f12;
-      --bg-card: #151519;
-      --bg-card-hover: #1a1a1f;
-      --border: rgba(255,255,255,0.06);
-      --border-hover: rgba(255,255,255,0.12);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255,255,255,0.5);
-      --text-muted: rgba(255,255,255,0.35);
-      --accent: #3b82f6;
-      --accent-glow: rgba(59,130,246,0.4);
-      --accent-secondary: #06b6d4;
-      --accent-tertiary: #8b5cf6;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Outfit', 'Noto Sans SC', -apple-system, sans-serif;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    .bg-effects {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .bg-gradient-1 {
-      position: absolute;
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(139,92,246,0.25) 0%, transparent 70%);
-      top: -450px;
-      left: -200px;
-      opacity: 0.6;
-      animation: float 25s ease-in-out infinite;
-    }
-
-    .bg-gradient-2 {
-      position: absolute;
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%);
-      bottom: -300px;
-      right: -150px;
-      opacity: 0.5;
-      animation: float 18s ease-in-out infinite reverse;
-    }
-
-    .bg-gradient-3 {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(6,182,212,0.2) 0%, transparent 70%);
-      top: 40%;
-      left: 60%;
-      opacity: 0.4;
-      animation: float 22s ease-in-out infinite;
-    }
-
-    .bg-grid {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 50px 50px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(40px, -40px) scale(1.05); }
-      66% { transform: translate(-30px, 30px) scale(0.95); }
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    header {
-      padding: 20px 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(8,8,10,0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-
-    .logo-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-tertiary));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .logo-text {
-      font-size: 20px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    nav {
-      display: flex;
-      gap: 36px;
-    }
-
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-tertiary));
-      transition: width 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--text-primary);
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .hero {
-      min-height: 100vh;
-      padding-top: 140px;
-      padding-bottom: 80px;
-    }
-
-    .hero-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: rgba(139,92,246,0.1);
-      border: 1px solid rgba(139,92,256,0.2);
-      border-radius: 50px;
-      font-size: 13px;
-      color: var(--accent-tertiary);
-      margin-bottom: 24px;
-      animation: fadeInUp 0.8s ease-out;
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: var(--accent-tertiary);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.2); }
-    }
-
-    .hero-header h1 {
-      font-size: clamp(42px, 7vw, 72px);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-      animation: fadeInUp 0.8s ease-out 0.1s both;
-    }
-
-    .hero-header h1 .gradient {
-      background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--accent-tertiary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: 20px;
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.7;
-      animation: fadeInUp 0.8s ease-out 0.2s both;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      margin-top: 48px;
-      animation: fadeInUp 0.8s ease-out 0.3s both;
-    }
-
-    .product-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 40px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .product-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent), var(--accent-tertiary), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .product-card:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-8px);
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    }
-
-    .product-card:hover::before {
-      opacity: 1;
-    }
-
-    .product-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .product-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      background: linear-gradient(135deg, rgba(59,130,246,0.2), rgba(139,92,246,0.1));
-    }
-
-    .product-card.coming .product-icon {
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    }
-
-    .product-tag {
-      padding: 6px 14px;
-      background: rgba(59,130,246,0.1);
-      border: 1px solid rgba(59,130,246,0.2);
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .product-card.coming .product-tag {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.1);
-      color: var(--text-muted);
-    }
-
-    .product-card h3 {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .product-card > p {
-      color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .product-links {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .product-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--accent), #2563eb);
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 12px;
-      transition: all 0.3s;
-    }
-
-    .product-btn:hover {
-      background: linear-gradient(135deg, #2563eb, var(--accent));
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(59,130,246,0.3);
-    }
-
-    .product-btn.secondary {
-      background: var(--bg-secondary);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-
-    .product-btn.secondary:hover {
-      background: var(--bg-card-hover);
-      border-color: var(--border-hover);
-    }
-
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    footer p {
-      color: var(--text-muted);
-      font-size: 14px;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .footer-right {
-      display: flex;
-      gap: 24px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 768px) {
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-subtitle {
-        font-size: 16px;
-      }
-
-      nav {
-        gap: 20px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="bg-effects">
-    <div class="bg-gradient-1"></div>
-    <div class="bg-gradient-2"></div>
-    <div class="bg-gradient-3"></div>
-    <div class="bg-grid"></div>
-  </div>
-
-  <header>
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <div class="logo-icon">H</div>
-        <span class="logo-text">珠海换呗科技</span>
-      </a>
-      <nav>
-        <a href="#products">产品</a>
-        <a href="https://github.com/hlf2002" target="_blank">GitHub</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="container">
-      <div class="hero-header">
-        <div class="hero-badge">专注软件创新</div>
-        <h1><span class="gradient">珠海换呗科技有限公司</span></h1>
-        <p class="hero-subtitle">致力于打造优质的软件工具和 AI 技能，赋能智能化时代</p>
-      </div>
-
-      <div class="products-grid" id="products">
-        <div class="product-card">
-          <div class="product-header">
-            <div class="product-icon">🔐</div>
-            <span class="product-tag">密码管理</span>
-          </div>
-          <h3>天下无密</h3>
-          <p>安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。</p>
-          <div class="product-links">
-            <a href="https://github.com/hlf2002/wumi" target="_blank" class="product-btn">
-              查看 GitHub
-            </a>
-            <a href="https://hlf2002.github.io/wumi-web" target="_blank" class="product-btn secondary">
-              产品官网
-            </a>
-          </div>
-        </div>
-
-        <div class="product-card coming">
-          <div class="product-header">
-            <div class="product-icon">✨</div>
-            <span class="product-tag">即将推出</span>
-          </div>
-          <h3>更多产品</h3>
-          <p>我们正在开发更多优质的软件工具和 AI 技能，敬请期待...</p>
-          <div class="product-links">
-            <span style="color: var(--text-muted); font-size: 14px;">敬请期待</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <p>© 2024 珠海换呗科技有限公司 · <a href="https://github.com/hlf2002" target="_blank">GitHub</a></p>
-        <div class="footer-right">
-          <span>ICP 备案号：<a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备2026020205号</a></span>
-          <span>公安备案：XXXXXXXXXX</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
+<html class="scroll-smooth dark" lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>珠海换呗科技有限公司</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        :root {
+            --deep-black: #020203;
+            --industrial-gray: #0d0e12;
+            --tech-blue: #0088ff;
+            --sleek-silver: #a1a1aa;
+            --border-subtle: rgba(255, 255, 255, 0.08);
         }
-      });
-    });
-  </script>
-</body>
-</html>
+        @layer base {
+            body {
+                @apply bg-[var(--deep-black)] text-slate-300 font-['Noto_Sans_SC'] antialiased;
+            }
+        }
+    </style>
+<style>
+        .industrial-card {
+            background: var(--industrial-gray);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .industrial-card:hover {
+            border-color: rgba(0, 136, 255, 0.4);
+            background: rgba(13, 14, 18, 0.8);
+        }
+        .holographic-title {
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 136, 255, 0.2);
+        }
+        .grid-blueprint {
+            background-image:
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body class="selection:bg-[var(--tech-blue)] selection:text-white">
+<div class="fixed inset-0 z-0 pointer-events-none">
+<div class="absolute inset-0 grid-blueprint opacity-20"></div>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-[var(--tech-blue)]/5 to-transparent blur-[120px]"></div>
+</div>
+<nav class="sticky top-0 z-50 w-full border-b border-white/5 bg-[var(--deep-black)]/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 border border-[var(--tech-blue)] flex items-center justify-center">
+<span class="font-mono text-[var(--tech-blue)] font-bold text-sm">HB</span>
+</div>
+<span class="font-bold tracking-tight text-white text-lg">珠海换呗科技有限公司</span>
+</div>
+<div class="hidden md:flex items-center gap-10 text-xs font-medium tracking-widest uppercase text-slate-400">
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="#products">产品中心</a>
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="https://github.com/hlf2002" target="_blank">GitHub</a>
+<a class="hover:text-[var(--tech-blue)] transition-colors" href="#about">关于我们</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="px-3 py-1 border border-white/10 rounded-sm font-mono text-[10px] text-slate-500 uppercase">
+                Status: Operational
+            </div>
+</div>
+</div>
+</nav>
+<header class="relative z-10 pt-32 pb-24 px-6">
+<div class="max-w-5xl mx-auto text-center">
+<div class="inline-flex items-center gap-3 px-3 py-1 mb-8 border-l border-[var(--tech-blue)] bg-[var(--tech-blue)]/5 text-[var(--tech-blue)] text-[10px] font-mono tracking-[0.2em] uppercase">
+            Zhuhai Huanbei Technology Co., Ltd. // Enterprise Portal
+        </div>
+<h1 class="text-6xl md:text-8xl font-bold mb-8 tracking-tighter holographic-title leading-tight">
+            珠海换呗科技有限公司
+        </h1>
+<p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12 font-light">
+            致力于打造优质的软件工具和 AI 技能，赋能智能化时代
+        </p>
+<div class="flex flex-wrap justify-center gap-4">
+<a class="px-8 py-4 bg-[var(--tech-blue)] text-white font-bold text-sm tracking-widest uppercase hover:bg-blue-600 transition-all" href="#products">
+                查看产品
+            </a>
+<a class="px-8 py-4 border border-white/10 text-white font-bold text-sm tracking-widest uppercase hover:bg-white/5 transition-all" href="https://github.com/hlf2002" target="_blank">
+                GitHub
+            </a>
+</div>
+</div>
+</header>
+<main class="relative z-10 max-w-7xl mx-auto px-6 py-24" id="products">
+<div class="flex items-end justify-between mb-16 border-b border-white/5 pb-8">
+<div>
+<h2 class="text-sm font-mono text-[var(--tech-blue)] uppercase tracking-[0.4em] mb-2">Product Matrix</h2>
+<h3 class="text-3xl font-bold text-white">核心产品矩阵</h3>
+</div>
+<div class="text-[10px] font-mono text-slate-600 uppercase hidden md:block text-right">
+            Deployment: v1.0.0<br/>
+            Region: Greater Bay Area
+        </div>
+</div>
+<div class="grid lg:grid-cols-2 gap-8">
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">lock_open</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-SEC-001</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">天下无密 - 密码管理器</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                安全、简洁的本地密码管理器。采用 AES-256-GCM 加密，支持浏览器自动填充，守护您的数字资产。
+            </p>
+<div class="flex gap-4">
+<a href="https://hlf2002.github.io/wumi-web" target="_blank" class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">立即访问</a>
+<a href="https://github.com/hlf2002/wumi" target="_blank" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">GitHub</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">psychology</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-002</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">MBTI 性格测评系统</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                基于大数据分析与心理学模型的精准人格画像工具，助力团队协作与自我探索。
+            </p>
+<div class="flex gap-4">
+<a href="https://www.7373.com.cn/mbti" target="_blank" class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">立即体验</a>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">算法验证</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">hub</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-003</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">换呗 AI 技能市场</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                汇聚各类 AI 技能和自动化工具的在线市场，让 AI 为您的工作和生活赋能。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">code</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-DEV-004</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">开发者工具套件</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                为开发者打造的效率工具集，包括代码生成、API 测试、自动化脚本等功能。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">cloud</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-CLD-005</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">云服务解决方案</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                提供稳定可靠的云端服务，支持私有化部署和定制化开发。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+<div class="industrial-card p-10 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-[var(--tech-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex items-start justify-between mb-10">
+<div class="w-16 h-16 border border-white/10 flex items-center justify-center text-[var(--tech-blue)]">
+<span class="material-symbols-outlined text-4xl">memory</span>
+</div>
+<span class="font-mono text-[10px] text-slate-500">SERIAL: HB-AI-006</span>
+</div>
+<h4 class="text-2xl font-bold text-white mb-4">AI 模型定制服务</h4>
+<p class="text-slate-400 leading-relaxed mb-8 h-[72px]">
+                基于大语言模型的定制化 AI 解决方案，为企业打造专属智能助手。
+            </p>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-white/5 border border-white/10 text-white text-xs font-bold uppercase tracking-widest hover:border-[var(--tech-blue)] transition-all">即将上线</button>
+<a href="#" class="px-6 py-3 border border-white/10 text-slate-500 text-xs font-bold uppercase tracking-widest hover:text-white transition-all">了解更多</a>
+</div>
+</div>
+</div>
+<section class="mt-32 grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-t border-b border-white/5">
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">开源项目</div>
+<div class="text-3xl font-bold text-white">10+</div>
+</div>
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">GitHub _stars</div>
+<div class="text-3xl font-bold text-white">1.2K+</div>
+</div>
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">产品用户</div>
+<div class="text-3xl font-bold text-[var(--tech-blue)]">10K+</div>
+</div>
+<div>
+<div class="text-[10px] font-mono text-slate-600 uppercase mb-2 tracking-widest">运行状态</div>
+<div class="text-3xl font-bold text-white">99.9%</div>
+</div>
+</section>
+</main>
+<footer class="relative z-10 pt-24 pb-12 px-6 border-t border-white/5" id="about">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+<div class="col-span-2">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-6 h-6 border border-[var(--tech-blue)] flex items-center justify-center">
+<span class="font-mono text-[var(--tech-blue)] text-[10px] font-bold">HB</span>
+</div>
+<span class="font-bold tracking-tight text-white">珠海换呗科技有限公司</span>
+</div>
+<p class="text-sm text-slate-500 max-w-sm leading-relaxed font-light">
+                    成立于2024年，致力于为全球用户提供优质的软件工具和 AI 解决方案。我们坚持开源精神，打造安全、高效、易用的产品。
+                </p>
+</div>
+<div>
+<h5 class="text-[11px] font-bold text-white uppercase tracking-widest mb-6">法律合规</h5>
+<ul class="flex flex-col gap-4 text-xs text-slate-500">
+<li><a class="hover:text-white transition-colors" href="#">用户协议</a></li>
+<li><a class="hover:text-white transition-colors" href="#">隐私政策</a></li>
+<li><a href="http://beian.miit.gov.cn/" target="_blank" class="hover:text-white transition-colors">粤ICP备2026020205号</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-[11px] font-bold text-white uppercase tracking-widest mb-6">开源社区</h5>
+<ul class="flex flex-col gap-4 text-xs text-slate-500">
+<li><a href="https://github.com/hlf2002" target="_blank" class="hover:text-white transition-colors">GitHub</a></li>
+<li><a href="https://github.com/hlf2002/wumi" target="_blank" class="hover:text-white transition-colors">天下无密</a></li>
+<li><a href="https://www.7373.com.cn/mbti" target="_blank" class="hover:text-white transition-colors">MBTI 测试</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5 text-[10px] font-mono text-slate-600">
+<div class="flex items-center gap-6">
+<span>© 2024 珠海换呗科技有限公司</span>
+<span class="hidden md:inline">ZHUHAI, CHINA</span>
+</div>
+<div class="flex items-center gap-4">
+<span id="sys-time"></span>
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+<span>SYSTEM ONLINE</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    function updateSystemTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const element = document.getElementById('sys-time');
+        if(element) {
+            element.textContent = `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+        }
+    }
+    setInterval(updateSystemTime, 1000);
+    updateSystemTime();
+</script>
+
+</body></html>
