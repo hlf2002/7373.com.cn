@@ -81,6 +81,7 @@
 <div class="absolute flex flex-col items-center">
 <span class="text-3xl font-bold text-charcoal" id="percent-text">0<span class="text-lg font-normal opacity-50">%</span></span>
 <span class="text-[10px] uppercase tracking-widest text-sage font-bold" id="match-status">匹配中</span>
+<span class="text-[10px] tracking-widest text-sage/60 font-bold mt-1 hidden" id="accuracy-text">准确率99%</span>
 </div>
 </div>
 <div class="w-full space-y-4">
@@ -139,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     matchStatus.textContent = '匹配中';
                 } else {
                     matchStatus.textContent = '匹配成功';
+                    document.getElementById('accuracy-text').classList.remove('hidden');
                 }
 
                 if (progress < 1) {
