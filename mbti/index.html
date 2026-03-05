@@ -115,10 +115,10 @@
                             每一种人格都是独一无二的。浏览四大核心类别，寻找属于您或您所爱之人的心灵归属。
                         </p>
 <div class="mt-10 inline-flex rounded-2xl bg-white dark:bg-slate-800 p-1.5 shadow-sm border border-primary/10">
-<button onclick="filterTypes('analyst')" data-category-init="analyst" class="category-btn rounded-xl bg-primary px-6 py-2 text-sm font-bold text-white transition-all">分析家</button>
-<button onclick="filterTypes('diplomat')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">外交官</button>
-<button onclick="filterTypes('sentinel')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">守护者</button>
-<button onclick="filterTypes('explorer')" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:text-primary transition-all">探险家</button>
+<button onclick="filterTypes('analyst', event)" data-category-init="analyst" class="category-btn rounded-xl px-6 py-2 text-sm font-bold hover:brightness-110">分析家</button>
+<button onclick="filterTypes('diplomat', event)" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:bg-primary/10 hover:text-primary">外交官</button>
+<button onclick="filterTypes('sentinel', event)" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:bg-primary/10 hover:text-primary">守护者</button>
+<button onclick="filterTypes('explorer', event)" class="category-btn rounded-xl px-6 py-2 text-sm font-bold text-warm-gray hover:bg-primary/10 hover:text-primary">探险家</button>
 </div>
 </div>
 <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -412,21 +412,20 @@
 </footer>
 </div>
 <script>
-function filterTypes(category) {
-    // 更新按钮状态
+function filterTypes(category, event) {
+    // 更新按钮状态 - 使用直接样式避免transition问题
     document.querySelectorAll('.category-btn').forEach(function(btn) {
         btn.classList.remove('bg-primary', 'text-white');
         btn.classList.add('text-warm-gray');
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
     });
 
     // 添加选中状态
-    if (event) {
-        event.target.classList.add('bg-primary', 'text-white');
-        event.target.classList.remove('text-warm-gray');
-    } else {
-        // 默认加载时，给第一个按钮添加选中状态
-        document.querySelector('[data-category-init="analyst"]').classList.add('bg-primary', 'text-white');
-        document.querySelector('[data-category-init="analyst"]').classList.remove('text-warm-gray');
+    var targetBtn = event && event.currentTarget ? event.currentTarget : document.querySelector('[data-category-init="analyst"]');
+    if (targetBtn) {
+        targetBtn.classList.remove('text-warm-gray');
+        targetBtn.classList.add('bg-primary', 'text-white');
     }
 
     // 筛选卡片
