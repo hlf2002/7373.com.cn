@@ -66,10 +66,10 @@
 <div class="absolute top-4 left-1/4 w-3 h-3 rounded-full bg-sage/30"></div>
 <div class="absolute bottom-12 right-1/4 w-4 h-4 rounded-full bg-sage/20"></div>
 </div>
-<h1 class="text-charcoal text-4xl font-bold mb-6 tracking-tight" id="title-text">
+<h1 class="text-charcoal text-4xl font-bold mb-6 tracking-tight" id="title-text" style="transition: transform 0.8s ease-out;">
                     正在捕捉您的灵魂底色...
                 </h1>
-<p class="text-charcoal/60 text-lg max-w-lg mx-auto mb-14 leading-relaxed font-light" id="desc-text">
+<p class="text-charcoal/60 text-lg max-w-lg mx-auto mb-14 leading-relaxed font-light" id="desc-text" style="transition: transform 0.8s ease-out;">
                     我们正在细致分析您的每一个回答，寻找那些构成您独特个性的细微线索。从 16 种人格原型中，为您匹配最契合的结果。
                 </p>
 <div class="flex flex-col items-center gap-10 w-full max-w-sm" id="progress-section">
@@ -113,13 +113,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         // Step 2: Scroll entire page up (translate Y)
         contentWrapper.style.transition = 'transform 0.8s ease-out';
-        contentWrapper.style.transform = 'translateY(-80px)';
+        contentWrapper.style.transform = 'translateY(-40px)';
 
-        titleText.style.transition = 'opacity 0.5s ease-out';
-        titleText.style.opacity = '0';
-
-        descText.style.transition = 'opacity 0.5s ease-out';
-        descText.style.opacity = '0';
+        // Keep title and description visible - just move them up slightly
+        titleText.style.transform = 'translateY(-20px)';
+        descText.style.transform = 'translateY(-20px)';
 
         // Step 3: Circle progress from 0 to 100% over 3 seconds (starts after 0.8s)
         setTimeout(function() {
@@ -146,9 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (progress < 1) {
                     requestAnimationFrame(animateCircle);
                 } else {
-                    // Step 4: Horizontal progress bar from 0 to 100% over 2 seconds
+                    // Step 4: Horizontal progress bar from 0 to 100% over 4 seconds
                     setTimeout(function() {
-                        var barDuration = 2000; // 2 seconds
+                        var barDuration = 4000; // 4 seconds
                         var barStartTime = Date.now();
 
                         function animateBar() {
