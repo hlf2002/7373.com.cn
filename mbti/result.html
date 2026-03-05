@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MBTI 测试结果</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#4e6e5d","accent": "#d97706","background-light": "#fdfbf7","background-dark": "#1a1c1a",
+                "sage-light": "#e8edeb",
+                "warm-gray": "#71716a"
+              },
+              fontFamily: {
+                "display": ["Inter", "Noto Sans SC", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "2xl": "2rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .progress-bar-bg { @apply h-3 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden flex; }
+            .progress-fill-left { @apply h-full bg-primary transition-all duration-500; }
+            .progress-fill-right { @apply h-full bg-slate-300 dark:bg-slate-600 transition-all duration-500; }
+            .trait-label { @apply text-sm font-bold text-slate-700 dark:text-slate-300; }
+            .trait-value { @apply text-xs font-medium text-warm-gray dark:text-slate-400 mt-1; }
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 backdrop-blur-md dark:bg-background-dark/80">
+<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+<div class="flex items-center gap-3">
+<a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+<div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">psychology</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">MBTI 探索</h2>
+</a>
+</div>
+<nav class="hidden md:flex items-center gap-10">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="index.html">人格类型</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">深度文章</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary dark:text-slate-300 transition-colors" href="#">联系我们</a>
+</nav>
+<div class="flex items-center gap-4">
+<a href="testing.html" class="hidden lg:flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 transition-all shadow-md shadow-primary/20">
+<span>重新测试</span>
+</a>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<!-- 简版报告 -->
+<section id="simple-report" class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-16">
+<div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+<div class="relative order-2 lg:order-1 flex justify-center lg:justify-start">
+<div class="relative p-4 rounded-3xl border-4 border-accent/20 bg-white dark:bg-slate-800 shadow-2xl">
+<div class="aspect-square w-72 md:w-96 rounded-2xl bg-sage-light dark:bg-primary/10 overflow-hidden flex items-center justify-center border border-accent/10">
+<img id="result-image" alt="Character" class="h-4/5 w-4/5 object-contain" src=""/>
+</div>
+<div class="absolute -top-4 -right-4 h-16 w-16 bg-accent rounded-full flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined text-3xl">star</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-8 order-1 lg:order-2">
+<div class="space-y-4">
+<span class="inline-block rounded-full bg-primary/10 px-4 py-1 text-xs font-bold uppercase tracking-wider text-primary">测试结果已生成</span>
+<div class="space-y-2">
+<p class="text-xl font-medium text-warm-gray dark:text-slate-400">您的性格类型是：</p>
+<h1 class="text-5xl font-black leading-tight tracking-tight text-slate-900 dark:text-slate-50 lg:text-7xl">
+                                <span id="result-name">建筑师</span> <span id="result-type" class="text-primary">(INTJ-A)</span>
+</h1>
+</div>
+<p id="result-desc" class="max-w-xl text-lg leading-relaxed text-warm-gray dark:text-slate-400">
+                            作为"建筑师"，你拥有一种与生俱来的求知欲和极其严谨的思维方式。你不仅是天生的策略家，更是能够将宏伟蓝图转化为现实的行动派。虽然你可能更倾向于独立思考，但你对世界深刻的洞察力常常让周围的人感到惊叹。
+                        </p>
+</div>
+<div class="flex flex-wrap gap-4">
+<button onclick="showDetailedReport()" class="h-14 rounded-xl bg-primary px-10 text-lg font-bold text-white shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+<span>查看详细报告</span>
+<span class="material-symbols-outlined">description</span>
+</button>
+<button class="h-14 rounded-xl border-2 border-primary/20 bg-white dark:bg-transparent px-10 text-lg font-bold text-primary hover:bg-primary/5 transition-all flex items-center gap-2">
+<span>分享我的结果</span>
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 性格维度解析 -->
+<section id="dimensions-section" class="bg-sage-light/30 dark:bg-background-dark/50 py-16">
+<div class="mx-auto max-w-4xl px-6 lg:px-10">
+<div class="mb-12 text-center">
+<h2 class="text-3xl font-bold text-slate-900 dark:text-slate-50">性格维度解析</h2>
+<p class="mt-4 text-warm-gray dark:text-slate-400">以下是你各项心理维度的倾向百分比：</p>
+</div>
+<div class="space-y-8 bg-white dark:bg-slate-800 p-8 lg:p-12 rounded-3xl shadow-sm border border-primary/5">
+<div class="space-y-3">
+<div class="flex justify-between trait-label">
+<span>内向 (I)</span>
+<span>外向 (E)</span>
+</div>
+<div class="progress-bar-bg">
+<div id="dim1-left" class="progress-fill-left" style="width: 70%"></div>
+<div id="dim1-right" class="progress-fill-right" style="width: 30%"></div>
+</div>
+<div class="flex justify-between trait-value">
+<span id="dim1-left-val" class="font-bold text-primary text-sm">70%</span>
+<span id="dim1-right-val">30%</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between trait-label">
+<span>直觉 (N)</span>
+<span>实感 (S)</span>
+</div>
+<div class="progress-bar-bg">
+<div id="dim2-left" class="progress-fill-left" style="width: 85%"></div>
+<div id="dim2-right" class="progress-fill-right" style="width: 15%"></div>
+</div>
+<div class="flex justify-between trait-value">
+<span id="dim2-left-val" class="font-bold text-primary text-sm">85%</span>
+<span id="dim2-right-val">15%</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between trait-label">
+<span>思考 (T)</span>
+<span>情感 (F)</span>
+</div>
+<div class="progress-bar-bg">
+<div id="dim3-left" class="progress-fill-left" style="width: 75%"></div>
+<div id="dim3-right" class="progress-fill-right" style="width: 25%"></div>
+</div>
+<div class="flex justify-between trait-value">
+<span id="dim3-left-val" class="font-bold text-primary text-sm">75%</span>
+<span id="dim3-right-val">25%</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between trait-label">
+<span>判断 (J)</span>
+<span>展望 (P)</span>
+</div>
+<div class="progress-bar-bg">
+<div id="dim4-left" class="progress-fill-left" style="width: 60%"></div>
+<div id="dim4-right" class="progress-fill-right" style="width: 40%"></div>
+</div>
+<div class="flex justify-between trait-value">
+<span id="dim4-left-val" class="font-bold text-primary text-sm">60%</span>
+<span id="dim4-right-val">40%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 优势盲点职业建议 -->
+<section id="suggestions-section" class="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-primary/5 shadow-sm">
+<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<h4 class="text-lg font-bold mb-2">性格优势</h4>
+<p id="strengths" class="text-sm text-warm-gray leading-relaxed">独立、目标明确、逻辑性极强，能够高效解决复杂问题。</p>
+</div>
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-primary/5 shadow-sm">
+<div class="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center text-accent mb-4">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h4 class="text-lg font-bold mb-2">潜在盲点</h4>
+<p id="weaknesses" class="text-sm text-warm-gray leading-relaxed">有时可能过于批判，或因过度理性而忽略了他人的情感需求。</p>
+</div>
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-800 border border-primary/5 shadow-sm">
+<div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<h4 class="text-lg font-bold mb-2">职业建议</h4>
+<p id="career" class="text-sm text-warm-gray leading-relaxed">适合需要战略规划、数据分析或复杂系统设计的专业领域。</p>
+</div>
+</div>
+</section>
+<!-- 详细报告区域（默认隐藏） -->
+<section id="detailed-report" class="hidden mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-20">
+<!-- 详细报告内容将在这里显示 -->
+<div class="text-center py-20">
+<h2 class="text-3xl font-bold mb-4">详细报告</h2>
+<p class="text-warm-gray">详细报告模板即将推出...</p>
+</div>
+</section>
+</main>
+<footer class="border-t border-primary/10 bg-white dark:bg-background-dark py-12">
+<div class="mx-auto max-w-7xl px-6 lg:px-10">
+<div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+<div class="flex items-center gap-3">
+<div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-lg">psychology</span>
+</div>
+<span class="text-lg font-bold text-slate-900 dark:text-slate-100">MBTI 探索</span>
+</div>
+<div class="flex gap-8 text-sm font-medium text-warm-gray">
+<a class="hover:text-primary transition-colors" href="#">隐私权政策</a>
+<a class="hover:text-primary transition-colors" href="#">服务条款</a>
+<a class="hover:text-primary transition-colors" href="#">关于我们</a>
+</div>
+<div class="flex gap-4">
+<a class="text-warm-gray hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-warm-gray hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">mail</span></a>
+</div>
+</div>
+<p class="mt-8 text-center text-xs text-warm-gray/60 dark:text-slate-500">
+                © 2024 MBTI 探索. 保留所有权利。本测试并非由 Myers &amp; Briggs 基金会提供。
+            </p>
+</div>
+</footer>
+</div>
+
+<script>
+// MBTI 类型数据
+const mbtiData = {
+    'INTJ': { name: '建筑师', desc: '富有想象力且具备战略眼光的思考者，他们对万事皆有计划。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY', strengths: '独立、目标明确、逻辑性极强，能够高效解决复杂问题。', weaknesses: '有时可能过于批判，或因过度理性而忽略了他人的情感需求。', career: '适合需要战略规划、数据分析或复杂系统设计的专业领域。' },
+    'INTP': { name: '逻辑学家', desc: '具有创造力的发明家，对知识有着永无止境的渴望。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6Ne0JYslbKE6vQ2fN-xBTQDM2NLVvkrVH1KfhUdb44k6wLRR30oGoBvsvJZviW2LL8Es8ECUOs1kb5TZicN1fCZXeFVSu9pU5ZvPa3qs4sXNwfw86oV22Nx8mQlUaOt1r8nj0vcGNyEZq1yGGWg9uUK6Jzp55iyrPZ2qseAVq02eNRpkSubTWGcjReciSL4X3X2Z5PgW5kI6T-raDGgTsT3YIuwDHjsiYrO8XUIWxiTG4nBsg-rUXhDtL7jXj8Ft3TbFYCcQD4Ko', strengths: '分析能力强、善于思考、富有创造力。', weaknesses: '可能过于理论化，不善于实际执行。', career: '适合科研、技术开发、数据分析等领域。' },
+    'ENTJ': { name: '指挥官', desc: '天生的领导者，果断、坚定，有强大的执行力。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkt7gnAWJyrfWgF5WV94vIFEbXWkt2g0MKiOCFUlh7E7jvF8XYloEtys13HN1StuML8tNbDzeHBBy_coq3jK3g8J59YSwV_h6VP4bIcH66RRLd6J8SdlFa6lHgwWbdSJfkOV1XfN6i2oqresHNafhWH9tEgwtSrioKNQJEvu0RoIWQ6McgDSdYhnvuSYNoG7-l3mcRfS2hGgLw7BdymYIc4kPrURDFao8veDgmT4cbhazZ9neQQUIWkFg6wciXGt37OxJPggAA_wg', strengths: '领导力强、决策果断、目标导向。', weaknesses: '可能过于严厉，缺乏耐心。', career: '适合企业管理、创业、法律等领域。' },
+    'ENTP': { name: '辩论家', desc: '聪明好奇的思考者，喜欢挑战和智力游戏。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '思维敏捷、创新能力强、善于沟通。', weaknesses: '可能过于争辩，缺乏专注。', career: '适合咨询、市场营销、媒体等领域。' },
+    'INFJ': { name: '提倡者', desc: '富有想象力的理想主义者，有强烈的正义感。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCJQxnlCcWV2diAbBtHX0ntPhIaJy6jJz6yi9rwjHRuvWmKqJ0tskVNxxeLFm33bbtv5gx3OEVtA0qun5ttin7SqY-1UGtNB6grdCyD9pGE26vwHCKIDCQaJbsOVib7OzvNuA01lDODhWEeLrAY31yVPvZIBcT0KaYPew0byDS-HSfsHh9XkPeITFOrFErRXOZWJyRC9z-HhjC7Zb7Y1QUYKQKaR4IlHC9WBmTAERb20awPOfsK-2-rqZ0iJUBveOR1ZbzsFrsZ3qs', strengths: '洞察力强、有理想、富有同情心。', weaknesses: '可能过于理想化，难以接受现实。', career: '适合心理咨询、教育、艺术等领域。' },
+    'INFP': { name: '调停者', desc: '诗意、善良且利他的主义者，总是渴望帮助有意义的事业。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB0eMZjGtSih1qxHhqbxW-wOvtarDgVb0Ti3ibRgvNL-SRo2dH3hBRra58L4JQRwjdgOG2kV1uCwZ_W0bdjILWPIqTe_Gu-BJJRl3LL1ZcMEoUWCTBXMLGMOrgG5eodBackmc2UgaH9SnKbkIzpyUMlkCcbuLob71F_9kOx-O_8wy0n78cOdaUWjWd6Tgt-XbYXmXlHXPGz3udVgGxNbhpWcPzFyS0lZ8P4kijBh1LUqvKjjcinPX6suRK6NFcm3IcAf7Xf7yc9QzY', strengths: '富有创意、善良、理想主义。', weaknesses: '可能过于敏感，不切实际。', career: '适合写作、艺术、心理咨询等领域。' },
+    'ENFJ': { name: '主人公', desc: '具有魅力且充满激情的领导者，能够鼓舞他们的听众。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '领导力强、富有魅力、善于激励他人。', weaknesses: '可能过于追求认可，忽视自己需求。', career: '适合人力资源、教育、演讲等领域。' },
+    'ENFP': { name: '竞选者', desc: '热情洋溢、富有想象力的创意者，随时准备探索新事物。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '热情、创意、善于激励他人。', weaknesses: '可能过于冲动，难以专注。', career: '适合营销、创意产业、媒体等领域。' },
+    'ISTJ': { name: '物流师', desc: '务实且可靠的事实主义者，注重细节和逻辑。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '可靠、勤奋、有责任感。', weaknesses: '可能过于僵化，不善于变通。', career: '适合财务、行政、工程等领域。' },
+    'ISFJ': { name: '守卫者', desc: '非常专注且温暖的守护者，时刻准备着保护他们爱的人。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '忠诚、细心、乐于助人。', weaknesses: '可能过度付出，忽视自己。', career: '适合护理、教育、服务业等领域。' },
+    'ESTJ': { name: '总经理', desc: '出色的管理员，在管理事务或人员方面无与伦比。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '组织能力强、执行力强、可靠。', weaknesses: '可能过于强硬，缺乏灵活性。', career: '适合管理、物流、执法等领域。' },
+    'ESFJ': { name: '执政官', desc: '极具同情心、爱社交且受欢迎的人，总是热衷于帮助他人。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '善于社交、关心他人、乐于助人。', weaknesses: '可能过于迁就他人，忽视自己需求。', career: '适合教育、医疗、服务业等领域。' },
+    'ISTP': { name: '鉴赏家', desc: '大胆且务实的实验者，擅长使用各类工具。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '动手能力强、冷静、务实。', weaknesses: '可能过于冷漠，不善于表达情感。', career: '适合技术、工程、手工艺等领域。' },
+    'ISFP': { name: '探险家', desc: '灵活有魅力的艺术家，随时准备探索和体验新事物。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '艺术感强、灵活、敏感。', weaknesses: '可能过于逃避压力，难以做决定。', career: '适合艺术、设计、烹饪等领域。' },
+    'ESTP': { name: '企业家', desc: '聪明、精力充沛且极具洞察力的人，真心享受生活在边缘。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '行动力强、善于谈判、灵活。', weaknesses: '可能过于冲动，缺乏耐心。', career: '适合销售、创业、娱乐等领域。' },
+    'ESFP': { name: '表演者', desc: '自发的、精力充沛的表演者，他们的生活充满乐趣。', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuHT-HWNl9R5hN0eE5a3tT0Xg4eVfF0pG8L9kQ3qK2nM5sL8vR7tW1jY6hF5cB3dA9eG8hK7lJ4mN6oP9qR2sT5uV8wX0yY3zA6bC9dE2fG5hI8kJ1lM4nO7pQ9rS2tU5vW6xY9zA', strengths: '热情、表演天赋、善于激励他人。', weaknesses: '可能过于冲动，缺乏计划性。', career: '适合表演、销售、娱乐等领域。' }
+};
+
+// 从URL获取MBTI类型
+function getMBTIFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('result') || 'INTJ';
+}
+
+// 初始化结果页面
+function initResult() {
+    const mbti = getMBTIFromURL().toUpperCase();
+    const data = mbtiData[mbti] || mbtiData['INTJ'];
+
+    // 更新基本信息
+    document.getElementById('result-name').textContent = data.name;
+    document.getElementById('result-type').textContent = `(${mbti}-A)`;
+    document.getElementById('result-desc').textContent = data.desc;
+    document.getElementById('result-image').src = data.image;
+    document.getElementById('result-image').alt = `${data.name} ${mbti}`;
+
+    // 更新优势盲点职业建议
+    document.getElementById('strengths').textContent = data.strengths;
+    document.getElementById('weaknesses').textContent = data.weaknesses;
+    document.getElementById('career').textContent = data.career;
+
+    // 更新维度数据（暂时使用示例数据，实际应该从testing页面传递）
+    updateDimensions(mbti);
+
+    // 更新页面标题
+    document.title = `MBTI 测试结果 - ${data.name} (${mbti})`;
+}
+
+// 更新维度数据
+function updateDimensions(mbti) {
+    // 解析MBTI类型
+    const dim1 = mbti[0] === 'E' ? 'I' : 'E'; // I vs E
+    const dim2 = mbti[1] === 'N' ? 'S' : 'N'; // N vs S
+    const dim3 = mbti[2] === 'T' ? 'F' : 'T'; // T vs F
+    const dim4 = mbti[3] === 'J' ? 'P' : 'J'; // J vs P
+
+    // 示例数据 - 实际应该从测试结果计算
+    const dim1Percent = mbti[0] === 'I' ? 70 : 30;
+    const dim2Percent = mbti[1] === 'N' ? 85 : 15;
+    const dim3Percent = mbti[2] === 'T' ? 75 : 25;
+    const dim4Percent = mbti[3] === 'J' ? 60 : 40;
+
+    // 更新DOM
+    document.getElementById('dim1-left').style.width = dim1Percent + '%';
+    document.getElementById('dim1-right').style.width = (100 - dim1Percent) + '%';
+    document.getElementById('dim1-left-val').textContent = dim1Percent + '%';
+    document.getElementById('dim1-right-val').textContent = (100 - dim1Percent) + '%';
+
+    document.getElementById('dim2-left').style.width = dim2Percent + '%';
+    document.getElementById('dim2-right').style.width = (100 - dim2Percent) + '%';
+    document.getElementById('dim2-left-val').textContent = dim2Percent + '%';
+    document.getElementById('dim2-right-val').textContent = (100 - dim2Percent) + '%';
+
+    document.getElementById('dim3-left').style.width = dim3Percent + '%';
+    document.getElementById('dim3-right').style.width = (100 - dim3Percent) + '%';
+    document.getElementById('dim3-left-val').textContent = dim3Percent + '%';
+    document.getElementById('dim3-right-val').textContent = (100 - dim3Percent) + '%';
+
+    document.getElementById('dim4-left').style.width = dim4Percent + '%';
+    document.getElementById('dim4-right').style.width = (100 - dim4Percent) + '%';
+    document.getElementById('dim4-left-val').textContent = dim4Percent + '%';
+    document.getElementById('dim4-right-val').textContent = (100 - dim4Percent) + '%';
+}
+
+// 显示详细报告
+function showDetailedReport() {
+    document.getElementById('simple-report').classList.add('hidden');
+    document.getElementById('dimensions-section').classList.add('hidden');
+    document.getElementById('suggestions-section').classList.add('hidden');
+    document.getElementById('detailed-report').classList.remove('hidden');
+
+    // 滚动到详细报告
+    document.getElementById('detailed-report').scrollIntoView({ behavior: 'smooth' });
+}
+
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', initResult);
+</script>
+</body></html>
