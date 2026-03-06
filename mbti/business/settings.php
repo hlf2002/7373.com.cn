@@ -9,35 +9,6 @@ $pdo = getDB();
 $message = '';
 $error = '';
 
-// 处理修改密码
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_password') {
-    $old_password = $_POST['old_password'] ?? '';
-    $new_password = $_POST['new_password'] ?? '';
-    $confirm_password = $_POST['confirm_password'] ?? '';
-
-    if (empty($old_password) || empty($new_password) || empty($confirm_password)) {
-        $error = '请填写所有密码字段';
-    } elseif (strlen($new_password) < 6) {
-        $error = '新密码长度至少6位';
-    } elseif ($new_password !== $confirm_password) {
-        $error = '两次输入的密码不一致';
-    } else {
-        // 验证旧密码
-        $stmt = $pdo->prepare("SELECT password_hash FROM companies WHERE id = ?");
-        $stmt->execute([$company_id]);
-        $company = $stmt->fetch();
-
-        if (!password_verify($old_password, $company['password_hash'])) {
-            $error = '原密码错误';
-        } else {
-            $new_hash = password_hash($new_password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("UPDATE companies SET password_hash = ? WHERE id = ?");
-            $stmt->execute([$new_hash, $company_id]);
-            $message = '密码修改成功';
-        }
-    }
-}
-
 // 处理重置API密钥
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'reset_api_key') {
     $key_id = $_POST['key_id'] ?? 0;
@@ -234,8 +205,6 @@ $login_logs = $stmt->fetchAll();
 </div>
 </div>
 <div class="p-8 space-y-8">
-<form method="POST">
-<input type="hidden" name="action" value="change_password"/>
 <div class="flex items-center justify-between pb-6 border-b border-warm-beige">
 <div class="flex items-start gap-4">
 <div class="p-3 bg-sage-light/30 rounded-2xl">
@@ -243,43 +212,18 @@ $login_logs = $stmt->fetchAll();
 </div>
 <div>
 <h4 class="font-bold text-gray-700">修改密码</h4>
-<p class="text-sm text-gray-400 mt-1 flex items-center gap-2">
-                                        当前安全等级：<span class="text-sage-green font-bold">高</span>
-<span class="flex gap-0.5">
-<span class="w-3 h-1 bg-sage-green rounded-full"></span>
-<span class="w-3 h-1 bg-sage-green rounded-full"></span>
-<span class="w-3 h-1 bg-sage-green rounded-full"></span>
-</span>
-</p>
+<p class="text-sm text-gray-400 mt-1 flex items-center gap-2">当前安全等级：<span class="text-sage-green font-bold">高</span><span class="flex gap-0.5"><span class="w-3 h-1 bg-sage-green rounded-full"></span><span class="w-3 h-1 bg-sage-green rounded-full"></span><span class="w-3 h-1 bg-sage-green rounded-full"></span></span></p>
 </div>
 </div>
-<div class="space-y-4">
-<div>
-<label class="block text-sm font-bold text-gray-700 mb-2">原密码</label>
-<input name="old_password" class="w-full px-4 py-3 bg-warm-beige/50 border border-warm-beige rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请输入原密码" type="password"/>
-</div>
-<div>
-<label class="block text-sm font-bold text-gray-700 mb-2">新密码</label>
-<input name="new_password" class="w-full px-4 py-3 bg-warm-beige/50 border border-warm-beige rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请输入新密码" type="password"/>
-</div>
-<div>
-<label class="block text-sm font-bold text-gray-700 mb-2">确认新密码</label>
-<input name="confirm_password" class="w-full px-4 py-3 bg-warm-beige/50 border border-warm-beige rounded-xl focus:ring-2 focus:ring-sage-green/20 focus:border-sage-green outline-none transition-all" placeholder="请再次输入新密码" type="password"/>
-</div>
-</div>
-<button type="submit" class="px-6 py-2 border-2 border-sage-green text-sage-green font-bold text-sm rounded-xl hover:bg-sage-green hover:text-white transition-all">
-                                立即修改
-                            </button>
-</form>
+<a href="change_password.php" class="px-6 py-2 border-2 border-sage-green text-sage-green font-bold text-sm rounded-xl hover:bg-sage-green hover:text-white transition-all">立即修改</a>
 </div>
 <div class="flex items-center justify-between">
 <div class="flex items-start gap-4">
 <div class="p-3 bg-sage-light/30 rounded-2xl">
 <span class="material-symbols-outlined !text-sage-green">history</span>
 </div>
-<div>
+<div class="flex flex-col gap-1">
 <h4 class="font-bold text-gray-700">登录活动</h4>
-<div class="flex flex-col gap-1 mt-1">
 <?php if (!empty($login_logs)): ?>
 <p class="text-sm text-gray-500">最近登录时间：<span class="text-gray-700 font-medium"><?php echo date('Y-m-d H:i:s', strtotime($login_logs[0]['created_at'])); ?></span></p>
 <p class="text-xs text-gray-400">登录地点：<?php echo htmlspecialchars($login_logs[0]['login_location'] ?: '未知'); ?></p>
@@ -288,9 +232,7 @@ $login_logs = $stmt->fetchAll();
 <?php endif; ?>
 </div>
 </div>
-</div>
-<button class="text-sm font-bold text-sage-green hover:underline">查看详情</button>
-</div>
+<a href="login_activity.php" class="text-sm font-bold text-sage-green hover:underline">查看详情</a>
 </div>
 </section>
 <section class="bg-white rounded-3xl custom-shadow border border-white overflow-hidden">

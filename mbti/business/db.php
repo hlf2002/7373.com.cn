@@ -10,6 +10,9 @@ define('DB_PASS', 'Mbti2024!@#');
 define('JUHE_SMS_APPKEY', '105e41edd818b92da18a959888f12cb4');
 define('JUHE_SMS_TEMPLATE_ID', 1); // 短信模板ID
 
+// IP查询配置（聚合数据）
+define('JUHE_IP_APPKEY', '86d3395168838897304ed50ec848428b');
+
 // 创建数据库连接
 function getDB() {
     static $pdo = null;
@@ -74,6 +77,32 @@ function logLogin($company_id, $ip, $location) {
     $pdo = getDB();
     $stmt = $pdo->prepare("INSERT INTO login_logs (company_id, login_ip, login_location) VALUES (?, ?, ?)");
     $stmt->execute([$company_id, $ip, $location]);
+}
+
+// 获取IP地址位置
+function getIpLocation($ip) {
+    // 跳过内网IP
+    if (preg_match('/^(127\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|192\.168\.)/', $ip)) {
+        return '本地网络';
+    }
+
+    $url = 'https://apis.juhe.cn/ip/ipNew';
+    $params = [
+        'ip' => $ip,
+        'key' => JUHE_IP_APPKEY
+    ];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url . '?' . http_build_query($params));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+    if ($result && $result['error_code'] === 0 && !empty($result['result']['Country'])) {
+        return $result['result']['Country'] . $result['result']['Province'] . $result['result']['City'];
+    }
+    return '未知';
 }
 
 // 生成6位数字验证码

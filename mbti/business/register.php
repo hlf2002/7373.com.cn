@@ -27,9 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = '请输入手机号';
     } elseif (empty($email)) {
         $error = '请输入工作邮箱';
-    } elseif (empty($code)) {
-        $error = '请输入验证码';
-    } elseif (!verifyCode($phone, $code)) {
+    } elseif (!empty($code) && !verifyCode($phone, $code)) {
         $error = '验证码错误或已过期';
     } elseif (empty($password)) {
         $error = '请设置密码';
@@ -188,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <div>
 <label class="block text-sm font-semibold text-slate-700 mb-1.5">验证码</label>
-<input name="code" class="form-input-custom" placeholder="6位数字验证码" required="" type="text"/>
+<input name="code" class="form-input-custom" placeholder="6位数字验证码（暂不需要）" type="text"/>
 </div>
 <div>
 <label class="block text-sm font-semibold text-slate-700 mb-1.5">设置密码</label>

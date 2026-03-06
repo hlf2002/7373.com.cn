@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // 记录登录日志
                 $ip = $_SERVER['REMOTE_ADDR'] ?? '';
-                $location = 'IP地址: ' . $ip;
+                $location = getIpLocation($ip);
                 logLogin($user['id'], $ip, $location);
 
                 // 记住登录
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <span class="material-symbols-outlined text-3xl">psychology</span>
 </div>
 <h1 class="text-2xl font-bold tracking-tight text-slate-800">MBTI 开放平台</h1>
-<p class="text-slate-400 mt-1">B端合作伙伴登录</p>
+<p class="text-slate-400 mt-1">B端客户登录</p>
 </div>
 <div class="login-card p-10">
 <div class="mb-8">
@@ -157,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <p class="mt-8 text-center text-sm text-slate-500">
             还没有账号？
-            <a class="font-bold text-primary hover:text-primary-dark transition-colors" href="register.php">申请成为合作伙伴</a>
+            <a class="font-bold text-primary hover:text-primary-dark transition-colors" href="register.php">立即注册</a>
 </p>
 <div class="mt-12 text-center">
 <div class="flex justify-center gap-6 text-xs font-medium text-slate-400">
