@@ -212,7 +212,7 @@
 <li>将所有请求参数（除 <code>sign</code> 外）按照参数名的字典顺序（ASCII码）进行排序。</li>
 <li>将排序后的参数及其对应值以 <code>key=value</code> 的形式用 <code>&amp;</code> 符号连接成字符串。</li>
 <li>在拼接后的字符串末尾加上 <code>&amp;secret_key=YOUR_SECRET_KEY</code>。</li>
-<li>对最终生成的字符串进行 <strong>MD5</strong> 加密，并将结果转换为大写（或小写，取决于具体实现，通常为大写）。</li>
+<li>对最终生成的字符串进行 <strong>MD5</strong> 加密（32位小写），得到最终的签名。</li>
 </ol>
 <div class="bg-slate-50 p-4 rounded-lg border border-accent-tan/50 mt-4">
 <p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">待签名原始字符串示例</p>
