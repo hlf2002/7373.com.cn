@@ -59,9 +59,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = $pdo->prepare("INSERT INTO balances (company_id, balance, total_recharged, total_used) VALUES (?, 0, 0, 0)");
                     $stmt->execute([$company_id]);
 
-                    $api_key = generateApiKey();
-                    $stmt = $pdo->prepare("INSERT INTO api_keys (company_id, key_value, key_name, is_active) VALUES (?, ?, '默认密钥', 1)");
-                    $stmt->execute([$company_id, $api_key]);
+                    [$secret_key, $access_key] = generateApiKeys();
+                    $stmt = $pdo->prepare("INSERT INTO api_keys (company_id, key_value, access_key, key_name, is_active) VALUES (?, ?, ?, '默认密钥', 1)");
+                    $stmt->execute([$company_id, $secret_key, $access_key]);
 
                     $pdo->commit();
 

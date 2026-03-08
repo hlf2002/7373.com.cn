@@ -18,9 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $stmt->execute([$key_id, $company_id]);
 
     if ($stmt->fetch()) {
-        $new_key = generateApiKey();
-        $stmt = $pdo->prepare("UPDATE api_keys SET key_value = ? WHERE id = ?");
-        $stmt->execute([$new_key, $key_id]);
+        [$new_secret_key, $new_access_key] = generateApiKeys();
+        $stmt = $pdo->prepare("UPDATE api_keys SET key_value = ?, access_key = ? WHERE id = ?");
+        $stmt->execute([$new_secret_key, $new_access_key, $key_id]);
         $message = 'API密钥已重置';
     }
 }
@@ -38,7 +38,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'copy_key') {
 }
 
 // 获取API密钥列表
-$stmt = $pdo->prepare("SELECT id, key_value, key_name, is_active, created_at, last_used_at FROM api_keys WHERE company_id = ?");
+$stmt = $pdo->prepare("SELECT id, key_value, access_key, key_name, is_active, created_at, last_used_at FROM api_keys WHERE company_id = ?");
 $stmt->execute([$company_id]);
 $api_keys = $stmt->fetchAll();
 
@@ -251,6 +251,25 @@ $login_logs = $stmt->fetchAll();
 <div class="p-8">
 <h4 class="font-bold text-gray-700 mb-4">密钥管理</h4>
 <?php foreach ($api_keys as $key): ?>
+<?php if ($key['access_key']): ?>
+<div class="bg-warm-beige/50 border border-warm-beige rounded-2xl p-5 flex items-center justify-between mb-4">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-white rounded-xl flex items-center justify-center border border-sage-light">
+<span class="material-symbols-outlined !text-sage-green">key</span>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Access Key (AK)</p>
+<p class="font-mono text-gray-700 tracking-wider mt-0.5"><?php echo htmlspecialchars($key['access_key']); ?></p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white border border-sage-light text-sage-green text-sm font-bold rounded-xl hover:bg-sage-light/30 transition-all">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+                                        复制
+                                    </button>
+</div>
+</div>
+<?php endif; ?>
 <div class="bg-warm-beige/50 border border-warm-beige rounded-2xl p-5 flex items-center justify-between mb-4">
 <div class="flex items-center gap-4">
 <div class="size-10 bg-white rounded-xl flex items-center justify-center border border-sage-light">

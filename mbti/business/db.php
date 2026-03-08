@@ -67,6 +67,13 @@ function requireLogin() {
     }
 }
 
+// 生成API密钥对
+function generateApiKeys() {
+    $secret_key = 'sk-' . bin2hex(random_bytes(16));
+    $access_key = 'ak-' . bin2hex(random_bytes(16));
+    return [$secret_key, $access_key];
+}
+
 // 生成API密钥
 function generateApiKey() {
     return 'sk-' . bin2hex(random_bytes(16));
