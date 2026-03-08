@@ -46,66 +46,92 @@
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
 <div class="layout-container flex h-full grow flex-col">
 <!-- Header -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-6 lg:px-20 py-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
-<div class="flex items-center gap-3 text-primary">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-6 lg:px-10 py-3 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex items-center gap-3 text-primary shrink-0">
 <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
 <span class="material-symbols-outlined">psychology</span>
 </div>
-<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">MBTI Platform</h2>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">MBTI Platform</h2>
 </div>
-<div class="flex flex-1 justify-end gap-6 items-center">
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="/">首页</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">控制台</a>
-<a class="text-primary text-sm font-bold border-b-2 border-primary" href="openapi-docs.html">API 文档</a>
-<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">系统设置</a>
+<div class="flex-1 max-w-md mx-8">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full bg-sage-50 dark:bg-slate-800 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="搜索文档..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 shrink-0">
+<nav class="hidden lg:flex items-center gap-6 mr-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="#">控制台</a>
+<a class="text-primary text-sm font-bold" href="#">API 文档</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary text-sm font-medium" href="#">系统设置</a>
 </nav>
-<div class="flex gap-3">
-<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-sage-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sage-200 transition-colors">
+<button class="flex size-9 items-center justify-center rounded-full bg-sage-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-sage-100 transition-colors">
 <span class="material-symbols-outlined text-[20px]">notifications</span>
 </button>
-<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
-<img alt="User profile avatar" data-alt="Professional user profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUtp3MiZWQTZMlj8gEVymG-bCHnmiTqrSydcJFrUXo0-D34abBMJ9P3TRGjEL_UIR_j1JvlAhUlKwBg_j_UqIfVTVQQ8NZFRBtXzyDRHYGqzTRS2nO8BZq2VwJsCDtGYkTwsM7bdIePB65s3VA3YbOEb6hSlNqa5X3PoG_3ufPqnTb9buiPDZeWtieDU6ldTXo4A4vOFfQ0fBaO0s1mkZ9KjWUZy3moY3svEmd5uWKktk-Y6nIBvnPxyXb6DljRXZAwts0YvDCQQ"/>
-</div>
+<div class="size-9 rounded-full border-2 border-primary overflow-hidden">
+<img alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUtp3MiZWQTZMlj8gEVymG-bCHnmiTqrSydcJFrUXo0-D34abBMJ9P3TRGjEL_UIR_j1JvlAhUlKwBg_j_UqIfVTVQQ8NZFRBtXzyDRHYGqzTRS2nO8BZq2VwJsCDtGYkTwsM7bdIePB65s3VA3YbOEb6hSlNqa5X3PoG_3ufPqnTb9buiPDZeWtieDU6ldTXo4A4vOFfQ0fBaO0s1mkZ9KjWUZy3moY3svEmd5uWKktk-Y6nIBvnPxyXb6DljRXZAwts0YvDCQQ"/>
 </div>
 </div>
 </header>
-<main class="flex-1 max-w-6xl mx-auto w-full px-6 py-12">
-<!-- Hero Section -->
-<div class="mb-16">
+<div class="flex flex-1 w-full max-w-[1440px] mx-auto">
+<!-- Sidebar -->
+<aside class="hidden md:flex flex-col w-64 border-r border-sage-100 dark:border-slate-800 p-6 gap-2 sticky top-[65px] h-[calc(100vh-65px)] overflow-y-auto">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 px-3">开发指南</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-sage-100 dark:bg-sage-900/30 text-primary font-bold transition-all" href="#">
+<span class="material-symbols-outlined text-xl">overview</span>
+<span class="text-sm">API 概览</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group" href="openapi-docs.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary">quiz</span>
+<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">人格测试接口</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group" href="openapi-query.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary">analytics</span>
+<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">测试结果查询接口</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group" href="openapi-errors.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary">error</span>
+<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">错误码信息</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-sage-50 dark:hover:bg-slate-800 transition-all group" href="openapi-verify.html">
+<span class="material-symbols-outlined text-xl group-hover:text-primary">verified_user</span>
+<span class="text-sm group-hover:text-slate-900 dark:group-hover:text-white">验签指南</span>
+</a>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 px-6 lg:px-12 py-10">
+<div class="mb-12">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-100 dark:bg-sage-900/30 text-primary text-xs font-bold mb-4">
 <span class="material-symbols-outlined text-sm">api</span>
-                        DEVELOPER HUB
-                    </div>
-<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-slate-100 mb-6 tracking-tight">API 概览</h1>
+                DEVELOPER HUB
+            </div>
+<h1 class="text-3xl md:text-4xl font-black text-slate-900 dark:text-slate-100 mb-6 tracking-tight">API 概览</h1>
 <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
-                        快速将专业 MBTI 性格测试集成到您的应用中。通过我们简单的 Embed &amp; Callback 工作流，您可以轻松获取用户的性格洞察。
-                    </p>
+                快速将专业 MBTI 性格测试集成到您的应用中。通过我们简单的 Embed &amp; Callback 工作流，您可以轻松获取用户的性格洞察。
+            </p>
 </div>
-<!-- Integration Concept -->
-<section class="mb-16 bg-white dark:bg-slate-900 rounded-3xl p-8 border border-sage-100 dark:border-slate-800 shadow-sm overflow-hidden relative">
+<section class="mb-12 bg-white dark:bg-slate-900 rounded-3xl p-8 border border-sage-100 dark:border-slate-800 shadow-sm overflow-hidden relative">
 <div class="grid md:grid-cols-2 gap-12 items-center">
 <div>
 <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
 <span class="material-symbols-outlined text-primary">hub</span>
-                                Embed &amp; Callback 工作流
-                            </h2>
+                        Embed &amp; Callback 工作流
+                    </h2>
 <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                                我们的 API 允许您在自己的系统中嵌入标准化的测试页面。一旦您的用户完成测试，我们会自动将结果发送到您预定义的回调 URL。
-                            </p>
+                        我们的 API 允许您在自己的系统中嵌入标准化的测试页面，一旦您的用户完成测试，我们会自动将结果发送到您预定义的回调 URL。
+                    </p>
 <div class="flex flex-wrap gap-4">
 <a href="openapi-docs.html" class="bg-primary hover:bg-sage-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-md flex items-center gap-2">
 <span class="material-symbols-outlined">description</span>
-                                    查看接口文档
-                                </a>
-<a href="business/settings.php" class="bg-sage-100 dark:bg-slate dark:text-sage-800 text-primary-300 px-6 py-3 rounded-xl font-bold hover:bg-sage-200 transition-all">
-                                    获取 API Key
-                                </a>
+                            查看接口文档
+                        </a>
+<a href="business/settings.php" class="bg-sage-100 dark:bg-slate-800 text-primary dark:text-sage-300 px-6 py-3 rounded-xl font-bold hover:bg-sage-200 transition-all">
+                            获取 API Key
+                        </a>
 </div>
 </div>
 <div class="relative">
 <div class="bg-beige-100 dark:bg-slate-800 rounded-2xl p-6 aspect-video flex flex-col justify-center items-center border border-sage-100 dark:border-slate-700">
-<!-- Data Flow Visualization -->
 <div class="flex items-center justify-between w-full relative">
 <div class="z-10 bg-white dark:bg-slate-700 p-4 rounded-xl border border-sage-200 dark:border-slate-600 text-center shadow-sm">
 <span class="material-symbols-outlined text-primary mb-1">devices</span>
@@ -125,16 +151,15 @@
 </div>
 </div>
 </section>
-<!-- Key Features -->
-<div class="grid md:grid-cols-3 gap-6 mb-16">
+<div class="grid md:grid-cols-3 gap-6 mb-12">
 <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
 <div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined">bolt</span>
 </div>
 <h3 class="font-bold text-lg mb-2">快速集成</h3>
 <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            无需开发测试逻辑，直接使用 iframe 或在新窗口中嵌入标准测试 URL 即可。
-                        </p>
+                    无需开发测试逻辑，直接使用 iframe 或在新窗口中嵌入标准测试 URL 即可。
+                </p>
 </div>
 <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
 <div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
@@ -142,8 +167,8 @@
 </div>
 <h3 class="font-bold text-lg mb-2">自动回调</h3>
 <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            测试完成后，系统通过标准的 HTTP POST 请求将结果实时推送到您的服务器。
-                        </p>
+                    测试完成后，系统通过标准的 HTTP POST 请求将结果实时推送到您的服务器。
+                </p>
 </div>
 <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
 <div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
@@ -151,12 +176,11 @@
 </div>
 <h3 class="font-bold text-lg mb-2">数据安全</h3>
 <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                            所有数据载荷均经过加密处理，并使用 API Key 身份验证确保接入安全。
-                        </p>
+                    所有数据载荷均经过加密处理，并使用 API Key 身份验证确保接入安全。
+                </p>
 </div>
 </div>
-<!-- Integration Steps -->
-<section class="mb-16">
+<section class="mb-12">
 <h2 class="text-2xl font-bold mb-8">集成步骤</h2>
 <div class="grid md:grid-cols-3 gap-8 relative">
 <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 border-t-2 border-dashed border-sage-200 dark:border-slate-800 -z-10"></div>
@@ -177,19 +201,19 @@
 </div>
 </div>
 </section>
-<!-- Footer Links Section -->
-<div class="flex flex-col md:flex-row items-center justify-between p-10 bg-sage-50 dark:bg-slate-900/50 rounded-3xl border border-sage-100 dark:border-slate-800">
+<div class="flex flex-col md:flex-row items-center justify-between p-8 bg-sage-50 dark:bg-slate-900/50 rounded-3xl border border-sage-100 dark:border-slate-800">
 <div class="mb-6 md:mb-0 text-center md:text-left">
 <h3 class="text-xl font-bold mb-2">准备好开始集成了吗？</h3>
 <p class="text-slate-500 dark:text-slate-400">阅读我们的详细开发文档，5 分钟内即可完成基础配置。</p>
 </div>
 <div class="flex gap-4">
 <a href="openapi-docs.html" class="bg-primary hover:bg-sage-600 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-md">
-                            立即开始
-                        </a>
+                    立即开始
+                </a>
 </div>
 </div>
 </main>
+</div>
 <!-- Footer Small -->
 <footer class="mt-auto px-6 lg:px-20 py-8 border-t border-sage-100 dark:border-slate-800 text-center">
 <p class="text-sm text-slate-400 dark:text-slate-500">
