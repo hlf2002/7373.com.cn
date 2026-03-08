@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7A9478",
+                        "background-light": "#F9F7F2",
+                        "background-dark": "#1A1C19",
+                        "sage": {
+                            "50": "#f4f6f4",
+                            "100": "#e3e9e3",
+                            "200": "#c9d5c8",
+                            "300": "#a6baa4",
+                            "400": "#7A9478",
+                            "500": "#627a60",
+                            "600": "#4d604b",
+                        },
+                        "beige": {
+                            "50": "#fdfdfc",
+                            "100": "#f9f7f2",
+                            "200": "#f1eee4",
+                            "300": "#e6e1d1",
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>MBTI API Overview</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-300">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-sage-200 dark:border-slate-800 px-6 lg:px-20 py-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">MBTI Platform</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">控制台</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary" href="#">API 文档</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">系统设置</a>
+</nav>
+<div class="flex gap-3">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-full bg-sage-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-sage-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img alt="User profile avatar" data-alt="Professional user profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIUtp3MiZWQTZMlj8gEVymG-bCHnmiTqrSydcJFrUXo0-D34abBMJ9P3TRGjEL_UIR_j1JvlAhUlKwBg_j_UqIfVTVQQ8NZFRBtXzyDRHYGqzTRS2nO8BZq2VwJsCDtGYkTwsM7bdIePB65s3VA3YbOEb6hSlNqa5X3PoG_3ufPqnTb9buiPDZeWtieDU6ldTXo4A4vOFfQ0fBaO0s1mkZ9KjWUZy3moY3svEmd5uWKktk-Y6nIBvnPxyXb6DljRXZAwts0YvDCQQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-6xl mx-auto w-full px-6 py-12">
+<!-- Hero Section -->
+<div class="mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sage-100 dark:bg-sage-900/30 text-primary text-xs font-bold mb-4">
+<span class="material-symbols-outlined text-sm">api</span>
+                        DEVELOPER HUB
+                    </div>
+<h1 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-slate-100 mb-6 tracking-tight">API 概览</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl leading-relaxed">
+                        快速将专业 MBTI 性格测试集成到您的应用中。通过我们简单的 Embed &amp; Callback 工作流，您可以轻松获取用户的性格洞察。
+                    </p>
+</div>
+<!-- Integration Concept -->
+<section class="mb-16 bg-white dark:bg-slate-900 rounded-3xl p-8 border border-sage-100 dark:border-slate-800 shadow-sm overflow-hidden relative">
+<div class="grid md:grid-cols-2 gap-12 items-center">
+<div>
+<h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">hub</span>
+                                Embed &amp; Callback 工作流
+                            </h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                                我们的 API 允许您在自己的系统中嵌入标准化的测试页面。一旦您的用户完成测试，我们会自动将结果发送到您预定义的回调 URL。
+                            </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary hover:bg-sage-500 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined">description</span>
+                                    查看接口文档
+                                </button>
+<button class="bg-sage-100 dark:bg-slate-800 text-primary dark:text-sage-300 px-6 py-3 rounded-xl font-bold hover:bg-sage-200 transition-all">
+                                    获取 API Key
+                                </button>
+</div>
+</div>
+<div class="relative">
+<div class="bg-beige-100 dark:bg-slate-800 rounded-2xl p-6 aspect-video flex flex-col justify-center items-center border border-sage-100 dark:border-slate-700">
+<!-- Data Flow Visualization -->
+<div class="flex items-center justify-between w-full relative">
+<div class="z-10 bg-white dark:bg-slate-700 p-4 rounded-xl border border-sage-200 dark:border-slate-600 text-center shadow-sm">
+<span class="material-symbols-outlined text-primary mb-1">devices</span>
+<p class="text-xs font-bold">客户系统</p>
+</div>
+<div class="absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-full h-[2px] bg-gradient-to-r from-sage-200 via-primary to-sage-200 opacity-50"></div>
+<div class="z-10 bg-primary p-5 rounded-full shadow-lg text-white animate-pulse">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="z-10 bg-white dark:bg-slate-700 p-4 rounded-xl border border-sage-200 dark:border-slate-600 text-center shadow-sm">
+<span class="material-symbols-outlined text-primary mb-1">phone_callback</span>
+<p class="text-xs font-bold">回调地址</p>
+</div>
+</div>
+<p class="mt-8 text-xs text-slate-500 italic">自动化的实时数据流传输</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Key Features -->
+<div class="grid md:grid-cols-3 gap-6 mb-16">
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
+<div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="font-bold text-lg mb-2">快速集成</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            无需开发测试逻辑，直接使用 iframe 或在新窗口中嵌入标准测试 URL 即可。
+                        </p>
+</div>
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
+<div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">sync_alt</span>
+</div>
+<h3 class="font-bold text-lg mb-2">自动回调</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            测试完成后，系统通过标准的 HTTP POST 请求将结果实时推送到您的服务器。
+                        </p>
+</div>
+<div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-sage-100 dark:border-slate-800 hover:border-primary transition-all group">
+<div class="size-12 rounded-xl bg-sage-50 dark:bg-sage-900/20 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<h3 class="font-bold text-lg mb-2">数据安全</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            所有数据载荷均经过加密处理，并使用 API Key 身份验证确保接入安全。
+                        </p>
+</div>
+</div>
+<!-- Integration Steps -->
+<section class="mb-16">
+<h2 class="text-2xl font-bold mb-8">集成步骤</h2>
+<div class="grid md:grid-cols-3 gap-8 relative">
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-1 border-t-2 border-dashed border-sage-200 dark:border-slate-800 -z-10"></div>
+<div class="flex flex-col items-center text-center">
+<div class="size-12 bg-white dark:bg-slate-900 border-2 border-primary rounded-full flex items-center justify-center text-primary font-bold text-lg mb-4 shadow-sm">1</div>
+<h4 class="font-bold mb-2">获取 API Key</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 px-4">在开发者后台创建应用并获取您的专属密钥。</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="size-12 bg-white dark:bg-slate-900 border-2 border-primary rounded-full flex items-center justify-center text-primary font-bold text-lg mb-4 shadow-sm">2</div>
+<h4 class="font-bold mb-2">在您的系统中内嵌测试 URL</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 px-4">调用 API 获取动态生成的测试链接并嵌入到您的应用界面。</p>
+</div>
+<div class="flex flex-col items-center text-center">
+<div class="size-12 bg-white dark:bg-slate-900 border-2 border-primary rounded-full flex items-center justify-center text-primary font-bold text-lg mb-4 shadow-sm">3</div>
+<h4 class="font-bold mb-2">接收并解析回调数据</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400 px-4">在您的服务端编写接口，接收 POST 回调并更新用户性格标签。</p>
+</div>
+</div>
+</section>
+<!-- Footer Links Section -->
+<div class="flex flex-col md:flex-row items-center justify-between p-10 bg-sage-50 dark:bg-slate-900/50 rounded-3xl border border-sage-100 dark:border-slate-800">
+<div class="mb-6 md:mb-0 text-center md:text-left">
+<h3 class="text-xl font-bold mb-2">准备好开始集成了吗？</h3>
+<p class="text-slate-500 dark:text-slate-400">阅读我们的详细开发文档，5 分钟内即可完成基础配置。</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-primary hover:bg-sage-600 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-md">
+                            立即开始
+                        </button>
+</div>
+</div>
+</main>
+<!-- Footer Small -->
+<footer class="mt-auto px-6 lg:px-20 py-8 border-t border-sage-100 dark:border-slate-800 text-center">
+<p class="text-sm text-slate-400 dark:text-slate-500">
+                    © 2024 MBTI Professional Testing Platform. All rights reserved.
+                </p>
+</footer>
+</div>
+</div>
+</body></html>

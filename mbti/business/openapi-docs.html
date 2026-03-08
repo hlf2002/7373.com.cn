@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7A9478", // Sage Green
+                        "background-light": "#F9F7F2", // Beige/Cream
+                        "background-dark": "#1A1C19",
+                        "accent-tan": "#E8E2D9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>人格测试接口说明 | MBTI API Documentation</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800">
+<div class="relative flex h-auto min-h-screen w-full flex-row overflow-x-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 border-r border-accent-tan bg-background-light sticky top-0 h-screen flex flex-col justify-between p-4 shrink-0">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 text-sm font-bold leading-tight uppercase tracking-wider">人格测试 API</h1>
+<p class="text-primary text-xs font-medium">v1.2.4</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">dashboard</span><span class="text-sm font-medium">API概览</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="text-sm font-medium">人格测试接口</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">database</span><span class="text-sm font-medium">测试结果查询接口</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">error</span><span class="text-sm font-medium">错误码信息</span></a></nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-3 bg-accent-tan/50 rounded-xl">
+<p class="text-[11px] text-slate-500 mb-2 uppercase font-bold tracking-widest">当前环境</p>
+<div class="flex items-center gap-2">
+<span class="size-2 bg-green-500 rounded-full"></span>
+<span class="text-xs font-semibold text-slate-700">Production</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-2.5 px-4 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                控制台
+            </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Header -->
+<header class="h-16 border-b border-accent-tan flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-20">
+<div class="flex items-center gap-6">
+<h2 class="text-slate-900 font-bold text-lg">人格测试接口说明</h2>
+<div class="h-4 w-px bg-accent-tan"></div>
+<div class="flex gap-4">
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">文档中心</a>
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">开发者社区</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 border border-transparent focus:border-primary/30 focus:bg-white rounded-full text-sm focus:ring-4 focus:ring-primary/10 w-64 transition-all outline-none" placeholder="搜索文档..." type="text"/>
+</div>
+<button class="text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-8 rounded-full bg-accent-tan flex items-center justify-center overflow-hidden border border-white">
+<img class="size-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrK3TexbYPLqUGbaKjITOKW2GV6ruv45l2KfYoxbMaB0eEJPZN3KNDmdhHPkCZM0XIylit4LDn2q6Rwj6Gu0jZK4AxQcqysXXgjbble2n6Qaq9mjSHqMJwK_FE1uQx3yMJS1vgwITd0xTV2hykllMZPcwMd6IwbHkhVFSZtGRHMCxxMcljIXRVqq2VgBAXDu-zJ3HMxVYXjPKabSxp9F21v5jJOdN8ORpD7mUMuzurTH7_2JnwDTMGARIcdLB-z3WvF6rTxj1sk14"/>
+</div>
+</div>
+</header>
+<!-- Article Content -->
+<div class="max-w-4xl mx-auto w-full py-12 px-8">
+<div class="mb-10">
+<h1 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">人格测试接口集成指南</h1>
+<p class="text-lg text-slate-600 leading-relaxed">
+                    通过简单的 API 集成，在您的应用中无缝嵌入专业的 MBTI 性格测试服务。我们提供全托管的测试流程，确保用户体验的一致性与专业性。
+                </p>
+</div>
+<!-- Section 1 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">01.</span> 集成方式
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl">iframe</span>
+<h4 class="font-bold text-slate-900 mb-2">Iframe 嵌入</h4>
+<p class="text-sm text-slate-600">在您的应用页面内直接通过 iframe 标签加载测试链接，保持用户在您的平台内不离开。</p>
+</div>
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm">
+<span class="material-symbols-outlined text-primary mb-3 text-3xl">open_in_new</span>
+<h4 class="font-bold text-slate-900 mb-2">新窗口跳转</h4>
+<p class="text-sm text-slate-600">引导用户至我们托管的测试页面，完成后通过回调 URL 自动引导用户返回您的应用。</p>
+</div>
+</div>
+</section>
+<!-- Section 2 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">02.</span> 请求地址 (Request URL)
+                </h3>
+<div class="bg-slate-900 rounded-xl p-6 relative group border border-slate-800 shadow-inner">
+<div class="flex items-center justify-between mb-4">
+<span class="px-2 py-0.5 bg-green-500/20 text-green-400 text-[10px] font-bold rounded uppercase tracking-widest">GET 请求</span>
+<button class="text-slate-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+<code class="text-sm text-primary break-all leading-relaxed font-mono">https://mbti.7373.com.cn/api/v1/test?external_user_id=UNIQUE_ID&callback_url=YOUR_CALLBACK_URL&access_key=YOUR_ACCESS_KEY&sign=GENERATED_SIGN</code>
+</div>
+</section>
+<!-- Section 3 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">03.</span> 参数说明 (Parameters)
+                </h3>
+<p class="text-sm text-slate-600 mb-4">
+    所有请求都必须在 URL 参数中包含有效的 <code class="bg-accent-tan/50 px-1.5 py-0.5 rounded text-sm font-mono">access_key</code>。
+</p><div class="overflow-hidden border border-accent-tan rounded-2xl">
+<table class="w-full text-left border-collapse bg-white">
+<thead>
+<tr class="bg-accent-tan/30 border-b border-accent-tan">
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">参数名</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">必选</th><th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">类型</th><th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">最大长度</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">说明</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-accent-tan"><tr><td class="px-6 py-4 text-sm font-mono text-primary font-semibold">access_key</td><td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">128</td><td class="px-6 py-4 text-sm text-slate-600">身份验证密钥，通过 URL 参数传递</td></tr>
+<tr>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">external_user_id</td>
+<td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">64</td>
+<td class="px-6 py-4 text-sm text-slate-600">客户端用户的唯一标识符，用于关联结果</td>
+</tr>
+<tr>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">callback_url</td>
+<td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串 (URL)</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">255</td>
+<td class="px-6 py-4 text-sm text-slate-600">测试完成后接收结果的 Webhook URL</td>
+</tr>
+<tr>
+<td class="px-6 py-4 text-sm font-mono text-primary font-semibold">lang</td>
+<td class="px-6 py-4 text-xs font-bold text-slate-400">可选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">10</td>
+<td class="px-6 py-4 text-sm text-slate-600">语言设置，默认 'zh-CN'。支持 'en-US'</td>
+</tr>
+<tr><td class="px-6 py-4 text-sm font-mono text-primary font-semibold">sign</td><td class="px-6 py-4 text-xs font-bold text-red-500">必选</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">字符串</td><td class="px-6 py-4 text-sm text-slate-600 font-mono">32</td><td class="px-6 py-4 text-sm text-slate-600">请求签名，详见签名算法说明</td></tr></tbody>
+</table>
+</div>
+</section>
+<!-- Section 4 -->
+<section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">04.</span> 签名算法 (Signature Algorithm)
+                </h3>
+<div class="p-6 bg-white border border-accent-tan rounded-2xl shadow-sm space-y-4">
+<p class="text-sm text-slate-600 leading-relaxed">
+                        为了保证 API 请求的安全性，所有请求都必须携带 <code>sign</code> 参数。签名生成的步骤如下：
+                    </p>
+<ol class="list-decimal list-inside text-sm text-slate-600 space-y-2">
+<li>将所有请求参数（除 <code>sign</code> 外）按照参数名的字典顺序（ASCII码）进行排序。</li>
+<li>将排序后的参数及其对应值以 <code>key=value</code> 的形式用 <code>&amp;</code> 符号连接成字符串。</li>
+<li>在拼接后的字符串末尾加上 <code>&amp;secret_key=YOUR_SECRET_KEY</code>。</li>
+<li>对最终生成的字符串进行 <strong>MD5</strong> 加密，并将结果转换为大写（或小写，取决于具体实现，通常为大写）。</li>
+</ol>
+<div class="bg-slate-50 p-4 rounded-lg border border-accent-tan/50 mt-4">
+<p class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">待签名原始字符串示例</p>
+<code class="text-xs text-slate-500 break-all font-mono italic">
+                            access_key=YOUR_ACCESS_KEY&amp;callback_url=YOUR_URL&amp;external_user_id=ID&amp;secret_key=YOUR_SECRET_KEY
+                        </code>
+</div>
+</div>
+</section><section class="mb-12">
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">05.</span> 回调机制 (Callback Mechanism)
+                </h3>
+<div class="prose prose-slate max-w-none text-slate-600">
+<p class="mb-4">
+                        当用户在我们的平台上完成所有测试题目后，系统将自动发起一个 <span class="font-bold text-slate-900">POST</span> 请求到您提供的 <code class="bg-accent-tan/50 px-1.5 py-0.5 rounded text-sm font-mono">callback_url</code>。
+                    </p>
+<div class="flex items-start gap-4 p-4 bg-primary/10 border-l-4 border-primary rounded-r-xl mb-6">
+<span class="material-symbols-outlined text-primary">info</span>
+<p class="text-sm text-primary font-medium leading-relaxed">
+                            回调请求包含 <code>application/json</code> 格式的 Payload。为了安全，建议在您的后端验证回调来源的 IP 或使用签名校验。
+                        </p>
+</div>
+</div>
+<div class="bg-slate-900 rounded-xl p-6 border border-slate-800 shadow-inner">
+<p class="text-[10px] font-bold text-slate-500 mb-4 uppercase tracking-widest">回调 JSON 示例</p>
+<pre class="text-sm text-slate-300 font-mono leading-relaxed overflow-x-auto">{
+  "event": "test.completed",
+  "timestamp": 1698765432,
+  "data": {
+    "external_user_id": "U_8829102",
+    "test_id": "mbti_v1_002",
+    "result_type": "INFJ",
+    "personality_name": "提倡者",
+    "scores": {
+      "extraversion": 24,
+      "introversion": 76,
+      "sensing": 45,
+      "intuition": 55,
+      "thinking": 30,
+      "feeling": 70,
+      "judging": 80,
+      "perceiving": 20
+    },
+    "summary": "富有想象力和战略性的思想家，一切皆在计划之中。"
+  }
+}
+                    </pre>
+</div>
+</section>
+<footer class="mt-20 pt-8 border-t border-accent-tan flex justify-between items-center text-slate-400 text-sm">
+<p>© 2024 MBTI Platform Integration Team</p>
+<div class="flex gap-4">
+<a class="hover:text-primary" href="#">服务条款</a>
+<a class="hover:text-primary" href="#">隐私政策</a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</body></html>
