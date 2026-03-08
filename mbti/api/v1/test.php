@@ -10,8 +10,8 @@
  * - sign: 签名 (必选)
  */
 
-require_once __DIR__ . '/../business/db.php';
-require_once __DIR__ . '/../business/api_common.php';
+require_once __DIR__ . '/../../business/db.php';
+require_once __DIR__ . '/../../business/api_common.php';
 
 // 验证请求方法
 requireMethod('GET');
