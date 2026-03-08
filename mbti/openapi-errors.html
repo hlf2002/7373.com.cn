@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7A9478", // Sage Green
+                        "background-light": "#F9F7F2", // Beige/Cream
+                        "background-dark": "#1A1C19",
+                        "accent-tan": "#E8E2D9",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>MBTI API 错误码文档</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 transition-colors duration-200">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="h-16 border-b border-accent-tan flex items-center justify-between px-8 bg-white/80 backdrop-blur-md sticky top-0 z-20">
+<div class="flex items-center gap-6">
+<h2 class="text-slate-900 font-bold text-lg">错误码说明</h2>
+<div class="h-4 w-px bg-accent-tan"></div>
+<div class="flex gap-4">
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">文档中心</a>
+<a class="text-sm text-slate-500 hover:text-primary transition-colors" href="#">开发者社区</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 border border-transparent focus:border-primary/30 focus:bg-white rounded-full text-sm focus:ring-4 focus:ring-primary/10 w-64 transition-all outline-none" placeholder="搜索文档..." type="text"/>
+</div>
+<button class="text-slate-600 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-8 rounded-full bg-accent-tan flex items-center justify-center overflow-hidden border border-white">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="User avatar for developer profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJwUKa1wnjA0_OrD3ReVHsaNFvyOLSEfrw0S631MfLd2HWnpkpVJHsCh1yaysA0y2-mA01myw3PHwFXmvFNCCLCTJANSfIX0UPq64Y_hF4snulsvxHRxsgcxnmyz8j_xXRUwEdzUF6GkoWu4XQG9NadtAyjbkrLbVl-LcmwHdHuLwJfUAKdNoJSNcFUDkPC0wmdI4RifWPwK1-Cv0B94Jx1bptau2TXrBLTH3kzHHBspHfnKEIeWH_M71jLjhetiBtOxwFArvDRbM"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 w-full max-w-[1440px] mx-auto">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-accent-tan bg-background-light sticky top-0 h-screen flex flex-col justify-between p-4 shrink-0 lg:flex">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 text-sm font-bold leading-tight uppercase tracking-wider">人格测试 API</h1>
+<p class="text-primary text-xs font-medium">v1.2.4</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="/"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">home</span><span class="text-sm font-medium">首页</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">dashboard</span><span class="text-sm font-medium">API概览</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">quiz</span><span class="text-sm font-medium">性格测试 API</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">query_stats</span><span class="text-sm font-medium">结果查询 API</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]">warning</span><span class="text-sm font-medium">错误码说明</span></a><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 hover:bg-accent-tan transition-colors group" href="#"><span class="material-symbols-outlined text-[20px] text-slate-400 group-hover:text-primary">security</span><span class="text-sm font-medium">验签指南</span></a></nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-3 bg-accent-tan/50 rounded-xl">
+<p class="text-[11px] text-slate-500 mb-2 uppercase font-bold tracking-widest">当前环境</p>
+<div class="flex items-center gap-2">
+<span class="size-2 bg-green-500 rounded-full"></span>
+<span class="text-xs font-semibold text-slate-700">Production</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-2.5 px-4 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                控制台
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 px-6 md:px-12 py-10 max-w-4xl">
+<div class="flex flex-col gap-2 mb-10">
+<nav class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-4">
+<span>文档</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span>参考指南</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary font-medium">错误码</span>
+</nav>
+<h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight text-4xl font-black text-slate-900 mb-4 tracking-tight">错误码说明</h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mt-2">
+                        本文档详细列出了 MBTI API 接口在调用过程中可能返回的状态码及其具体含义，帮助您在集成过程中快速定位并解决问题。
+                    </p>
+</div>
+<!-- Section: Standard Status Codes -->
+<section class="mb-12">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1.5 h-6 bg-primary rounded-full"></div>
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">01.</span> 通用状态码
+                </h3>
+</div>
+<div class="overflow-hidden border border-accent-tan rounded-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-accent-tan/30 border-b border-accent-tan">
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 w-32">状态码</th>
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 w-48">含义</th>
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">详细描述与建议</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">200</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">SUCCESS</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">请求成功。业务数据包含在返回体的 data 字段中。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800">400</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">BAD_REQUEST</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">请求参数错误。请检查 JSON 格式是否正确或必填参数是否缺失。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-400 border border-rose-200 dark:border-rose-800">401</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">UNAUTHORIZED</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">身份验证失败。API Key 无效、已禁用或已过期。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-400 border border-rose-200 dark:border-rose-800">403</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">FORBIDDEN</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">权限不足。您当前的套餐级别不支持访问该特定 API 终结点。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 border border-red-200 dark:border-red-800">500</span>
+</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">INTERNAL_ERROR</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">服务器内部错误。请记录 Request ID 并联系我们的技术支持团队。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Section: Signature Verification Errors -->
+<section class="mb-12">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-1.5 h-6 bg-primary rounded-full"></div>
+<h3 class="flex items-center gap-2 text-2xl font-bold text-slate-900 mb-6">
+<span class="text-primary font-mono bg-primary/10 px-2 py-0.5 rounded">02.</span> 签名校验相关错误
+                </h3>
+</div>
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-6 mb-6 border border-primary/20">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">lock_open</span>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-1">注意：安全验证</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    为了保证数据传输的安全，所有写入类请求均需要通过 HmacSHA256 签名校验。若签名验证失败，接口将返回以下特定错误码。
+                                </p>
+</div>
+</div>
+</div>
+<div class="overflow-hidden border border-accent-tan rounded-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 w-32">错误码</th>
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 w-48">具体原因</th>
+<th class="px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200">故障排除建议</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40101</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">签名不匹配</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">生成的签名值与服务器计算结果不一致。请检查待签名字符串的排序顺序及 App Secret。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40102</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">重放攻击检测</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Timestamp 字段与服务器当前时间偏差超过 300 秒。请同步您的系统时钟。</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-rose-500 font-bold">40103</td>
+<td class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-white">Nonce 重复</td>
+<td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">Nonce 随机字符串已在近期被使用。请确保每次请求的 Nonce 具有唯一性。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Help & Support Footer -->
+<footer class="mt-20 pt-8 border-t border-accent-tan flex justify-between items-center text-slate-400 text-sm">
+<p>© 2024 MBTI Platform Integration Team</p>
+<div class="flex gap-4">
+<a class="hover:text-primary" href="#">服务条款</a>
+<a class="hover:text-primary" href="#">隐私政策</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Sticky Mobile Bottom Nav -->
+</div>
+</body></html>
